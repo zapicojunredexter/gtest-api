@@ -1,0 +1,11 @@
+// fetchRecentChunks?contractId={contractId}
+
+// fetchWorkingHours?contractId={contractId}
+
+// fetchMembers?contractId={contractId}
+
+// fetchTeams?contractId={contractId}
+
+// fetchMonthlyReport?contractId={contractId}&month={month}
+
+// fetchPersonalReport?contractId={contractId}&userId={userId}
