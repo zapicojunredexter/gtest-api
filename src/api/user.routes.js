@@ -1,9 +1,11 @@
-const Firestore = require('@google-cloud/firestore');
+// const Firestore = require('@google-cloud/firestore');
 const express = require("express");
+
+/*
 const app = express();
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
-
+*/
 const userController = require('./user.controller');
 
 const router = express.Router();

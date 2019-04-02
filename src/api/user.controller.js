@@ -7,6 +7,33 @@ const db = admin.firestore();
 
 const COLLECTION_NAME = 'Users';
 
+exports.fetchAll = async (req, res) => {
+    try {
+        const userRef = db.collection(COLLECTION_NAME);
+        const response = await userRef.get();
+
+        res.status(200).send(response.docs.map((obj) => obj.data()));
+    } catch (error) {
+        res.status(500).send(error);
+    }
+
+}
+
+
+exports.edit = (req, res) => {
+    res.send("test");
+};
+
+  /*
+  const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+
+admin.initializeApp(functions.config().firebase);
+
+const db = admin.firestore();
+
+const COLLECTION_NAME = 'Users';
+
 exports.fetchAll = async (req, res, next) => {
     const userRef = db.collection(COLLECTION_NAME);
     userRef
@@ -35,3 +62,4 @@ exports.edit = async (req, res, next) => {
       return next(error.toString());
     }
   };
+  */
