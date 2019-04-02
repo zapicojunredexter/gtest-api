@@ -4,6 +4,17 @@ const app = express();
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
+const userController = require('./user.controller');
+
+const router = express.Router();
+
+router
+    .route("/")
+    .get(userController.fetchAll)
+
+module.exports = router;
+
+/*
 const COLLECTION_NAME = 'Users';
 
 admin.initializeApp(functions.config().firebase);
@@ -111,3 +122,4 @@ app.get("/testzxc",
 
 
 module.exports = app;
+*/
