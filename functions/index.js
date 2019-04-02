@@ -4,12 +4,8 @@ const express = require("express")
 /* Express */
 const main = express();
 
-
-const chunkRoutes = require("./src/routes/chunkRoutes");
-main.use('/api/chunks',chunkRoutes);
-// main.get("/test", (req, res) => {
-//   res.send("Hello from Express on Firebase!")
-// })
+const userRoutes = require("./src/routes/userRoutes");
+main.use('/api/users',userRoutes);
 
 
-exports.attendanceApp = functions.https.onRequest(main)
+exports.gtestAPI = functions.https.onRequest(main)
