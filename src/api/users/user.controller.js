@@ -39,6 +39,31 @@ exports.fetchUser = async (req, res) => {
 exports.add = async (req, res) => {
     try {
         const {body} = req;
+        const {email, password} = body;
+
+        const registrationRes = await admin.auth().createUser({
+            email,
+            password
+        })
+        .catch((error) => {
+            throw error;
+        });
+        const {uid} = registrationRes;
+
+        const userRef = db.collection(COLLECTION_NAME).doc(uid);
+        Reflect.deleteProperty(body,"password");
+        await userRef
+            .set({
+                ...body,
+                "id": uid,
+                "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
+            },{"merge": true});
+    
+        return res.status(200).send({"success": true});
+
+        /*
+        // if exclude registration flow
+        const {body} = req;
         const userRef = db.collection(COLLECTION_NAME);
         const addedUser = await userRef.add({
             ...body,
@@ -51,6 +76,7 @@ exports.add = async (req, res) => {
         await userRef.doc(id).set({id},{"merge": true});
 
         return res.status(200).send({"success": true});
+        */
     } catch (error) {
         return res.status(500).send({"error": error.message});
     }
