@@ -12,8 +12,24 @@ const router = express.Router();
 
 router
     .route("/")
-    .get(userController.fetchAll)
+    .get(userController.fetchUsers)
 
+router
+    .route("/:id")
+    .get(userController.fetchUser)
+
+router
+    .route("/")
+    .post(userController.add)
+
+router
+    .route("/")
+    .put(userController.update)
+
+router
+    .route("/")
+    .delete(userController.delete)
+    
 module.exports = router;
 
 /*

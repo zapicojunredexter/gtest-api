@@ -7,59 +7,97 @@ const db = admin.firestore();
 
 const COLLECTION_NAME = 'Users';
 
-exports.fetchAll = async (req, res) => {
+exports.fetchUsers = async (req, res) => {
     try {
         const userRef = db.collection(COLLECTION_NAME);
         const response = await userRef.get();
 
-        res.status(200).send(response.docs.map((obj) => obj.data()));
+        return res.status(200).send(response.docs.map((obj) => obj.data()));
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send({"error": error.message});
     }
-
 }
 
+exports.fetchUser = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const userRef = db.collection(COLLECTION_NAME);
+        const response = await userRef
+            .doc(id)
+            .get();
 
-exports.edit = (req, res) => {
-    res.send("test");
+        if (!response.exists) {
+            return res.status(404).send({"message": "User not found"});
+        }
+
+        return res.status(200).send(response.data());    
+    } catch (error) {
+        return res.status(500).send({"error": error.message});
+    }
+}
+
+exports.add = async (req, res) => {
+    try {
+        const {body} = req;
+        const userRef = db.collection(COLLECTION_NAME);
+        const addedUser = await userRef.add({
+            ...body,
+            "createdAtMs": admin.firestore.FieldValue.serverTimestamp(),
+            "deleted": false,
+            "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
+        });
+        const {id} = addedUser;
+
+        await userRef.doc(id).set({id},{"merge": true});
+
+        return res.status(200).send({"success": true});
+    } catch (error) {
+        return res.status(500).send({"error": error.message});
+    }
 };
 
-  /*
-  const admin = require('firebase-admin');
-const functions = require('firebase-functions');
-
-admin.initializeApp(functions.config().firebase);
-
-const db = admin.firestore();
-
-const COLLECTION_NAME = 'Users';
-
-exports.fetchAll = async (req, res, next) => {
-    const userRef = db.collection(COLLECTION_NAME);
-    userRef
-        .get()
-        .then(doc => {
-            if (doc.empty) {
-                return res.send([]);
-            }
-            return res.status(200).send(doc.docs.map(obj => obj.data()));
-        })
-        .catch(error => {
-            return res.status(500).send(error);
-        });
-}
-
-
-exports.edit = async (req, res, next) => {
+exports.update = async (req, res) => {
     try {
-      const user = new User(req.body);
-      const result = await user.save();
-      const response = new CreatedResponse('User Created.', result);
-      return res.status(response.status).send(response.toString());
+        const {body} = req;
+        const {id} = body;
+        const userRef = db.collection(COLLECTION_NAME).doc(id);
+
+        const user = await userRef.get();
+        if (!user.exists) {
+            return res.status(404).send({"message": "User not found"});
+        }
+
+        await userRef
+            .set({
+                ...body,
+                "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
+            },{"merge": true});
+    
+        return res.status(200).send({"success": true});
     } catch (error) {
-      console.error(error);
-    //   const err = new ServerErrorResponse('Failed to create user');
-      return next(error.toString());
+        return res.status(500).send({"error": error.message});
     }
-  };
-  */
+};
+
+exports.delete = async (req, res) => {
+    try {
+        const {body} = req;
+        const {id} = body;
+        const userRef = db.collection(COLLECTION_NAME).doc(id);
+
+        const user = await userRef.get();
+        if (!user.exists) {
+            return res.status(404).send({"message": "User not found"});
+        }
+    
+        await userRef
+            .set({
+                "deleted": true,
+                "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
+            },{"merge": true});
+    
+        return res.status(200).send({"success": true});
+    } catch (error) {
+        return res.status(500).send({"error": error.message});
+    }
+};
