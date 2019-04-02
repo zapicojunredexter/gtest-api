@@ -1,11 +1,11 @@
 const functions = require("firebase-functions")
+
 const express = require("express")
 
-/* Express */
 const main = express();
 
-const userRoutes = require("./src/routes/userRoutes");
+const userRoutes = require("./src/api/user.routes");
 main.use('/api/users',userRoutes);
 
-
 exports.gtestAPI = functions.https.onRequest(main)
+

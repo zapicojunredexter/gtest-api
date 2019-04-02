@@ -63,24 +63,6 @@ app.post("/",
         } catch (error) {
             return res.status(500).send(error);
         }
-        // const userRef = db.collection(COLLECTION_NAME);
-        // userRef
-        //     .add(body)
-        //     .then(doc => {
-        //         const { id } = doc;
-        //         return userRef
-        //             .doc(id)
-        //             .set({ id }, { merge: true })
-        //             .then(doc => {
-        //                 return res.status(200).send({ success : true });
-        //             })
-        //             .catch(error => {
-        //                 return res.status(500).send(error);
-        //             })
-        //     })
-        //     .catch(error => {
-        //         return res.status(500).send(error);
-        //     });
     }
 );
 
