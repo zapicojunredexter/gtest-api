@@ -1,10 +1,12 @@
-const functions = require("firebase-functions")
-const express = require("express")
+const functions = require("firebase-functions");
+const express = require("express");
+const adminSdk = require("./src/services/admin-sdk.service");
 
-const main = express();
+adminSdk.initDefaultApp();
+
 const userRoutes = require("./src/api/users/user.routes");
+const main = express();
 main.use(userRoutes);
-// main.use('/api/users',userRoutes);
 main.get("/", (req, res) => res.sendFile('docs/output.html', {"root": __dirname}));
 
 exports.gtestAPI = functions.https.onRequest(main)

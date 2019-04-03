@@ -1,15 +1,12 @@
 const admin = require('firebase-admin');
-const functions = require('firebase-functions');
+const collectionsService = require('../../services/collections.service');
 
-admin.initializeApp(functions.config().firebase);
+const usersCollection = collectionsService.getUsersCollection();
 
-const db = admin.firestore();
-
-const COLLECTION_NAME = 'Users';
 
 exports.fetchUsers = async (req, res) => {
     try {
-        const userRef = db.collection(COLLECTION_NAME);
+        const userRef = usersCollection;
         const response = await userRef.get();
 
         return res.status(200).send(response.docs.map((obj) => obj.data()));
@@ -32,7 +29,7 @@ exports.add = async (req, res) => {
         });
         const {uid} = registrationRes;
 
-        const userRef = db.collection(COLLECTION_NAME).doc(uid);
+        const userRef = usersCollection.doc(uid);
         Reflect.deleteProperty(body,"password");
         await userRef
             .set({
@@ -67,7 +64,7 @@ exports.add = async (req, res) => {
 exports.fetchUser = async (req, res) => {
     try {
         const {id} = req.params;
-        const userRef = db.collection(COLLECTION_NAME);
+        const userRef = usersCollection;
         const response = await userRef
             .doc(id)
             .get();
@@ -87,7 +84,7 @@ exports.update = async (req, res) => {
         const {id} = req.params;
         const {body} = req;
 
-        const userRef = db.collection(COLLECTION_NAME).doc(id);
+        const userRef = usersCollection.doc(id);
         const user = await userRef.get();
         if (!user.exists) {
             return res.status(404).send({"message": "User not found"});
@@ -108,7 +105,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const {id} = req.params;
-        const userRef = db.collection(COLLECTION_NAME).doc(id);
+        const userRef = usersCollection.doc(id);
 
         const user = await userRef.get();
         if (!user.exists) {
