@@ -18,24 +18,6 @@ exports.fetchUsers = async (req, res) => {
     }
 }
 
-exports.fetchUser = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const userRef = db.collection(COLLECTION_NAME);
-        const response = await userRef
-            .doc(id)
-            .get();
-
-        if (!response.exists) {
-            return res.status(404).send({"message": "User not found"});
-        }
-
-        return res.status(200).send(response.data());    
-    } catch (error) {
-        return res.status(500).send({"error": error.message});
-    }
-}
-
 exports.add = async (req, res) => {
     try {
         const {body} = req;
@@ -82,12 +64,30 @@ exports.add = async (req, res) => {
     }
 };
 
+exports.fetchUser = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const userRef = db.collection(COLLECTION_NAME);
+        const response = await userRef
+            .doc(id)
+            .get();
+
+        if (!response.exists) {
+            return res.status(404).send({"message": "User not found"});
+        }
+
+        return res.status(200).send(response.data());    
+    } catch (error) {
+        return res.status(500).send({"error": error.message});
+    }
+}
+
 exports.update = async (req, res) => {
     try {
+        const {id} = req.params;
         const {body} = req;
-        const {id} = body;
-        const userRef = db.collection(COLLECTION_NAME).doc(id);
 
+        const userRef = db.collection(COLLECTION_NAME).doc(id);
         const user = await userRef.get();
         if (!user.exists) {
             return res.status(404).send({"message": "User not found"});
@@ -107,8 +107,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const {body} = req;
-        const {id} = body;
+        const {id} = req.params;
         const userRef = db.collection(COLLECTION_NAME).doc(id);
 
         const user = await userRef.get();
