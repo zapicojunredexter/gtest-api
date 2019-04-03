@@ -1,0 +1,70 @@
+{
+  "pagination": {
+    "limit": 5,
+    "start": 0,
+    "next": "/suppliers?_page=2&_limit=5"
+  },
+  "size": 5,
+  "data": {
+    "i3M32iJk34jlkkj2378nk34": {
+      "name": "Vutongz",
+      "nameOfCeo": "Dexter Juntilla",
+      "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+      "establishedAt": "2019-02-18T11:17:55+08:00",
+      "employeeNumber": 52,
+      "capital": 69420666,
+      "isDomestic": true,
+      "phoneNumber": "056-6636-4567",
+      "typeOfBusiness": "Coconut juice ditributor",
+      "note": ""
+    },
+    "h8eSftOtKIVgugSccT6jpMZ8": {
+      "name": "Voluptate reprehenderit",
+      "nameOfCeo": "Cody Maldonado",
+      "address": "Venezuela",
+      "establishedAt": "2019-02-18T11:17:55+08:00",
+      "employeeNumber": 52,
+      "capital": 69420666,
+      "isDomestic": true,
+      "phoneNumber": "056-6636-4567",
+      "typeOfBusiness": "Coconut juice ditributor",
+      "note": ""
+    },
+    "FLGvhuN5nyW8FOJXwHgVYMXEi": {
+      "name": "Est adipisicing",
+      "nameOfCeo": "Troy Jefferson",
+      "address": "Mexico",
+      "establishedAt": "2019-02-18T11:17:55+08:00",
+      "employeeNumber": 52,
+      "capital": 69420666,
+      "isDomestic": true,
+      "phoneNumber": "056-6636-4567",
+      "typeOfBusiness": "Coconut juice ditributor",
+      "note": ""
+    },
+    "nC7ClODfvZ7MZfANDRaS5HeANJ": {
+      "name": "Adipisicing aliquip",
+      "nameOfCeo": "Herman Miller",
+      "address": "Barbados",
+      "establishedAt": "2019-02-18T11:17:55+08:00",
+      "employeeNumber": 52,
+      "capital": 69420666,
+      "isDomestic": true,
+      "phoneNumber": "056-6636-4567",
+      "typeOfBusiness": "Coconut juice ditributor",
+      "note": ""
+    },
+    "If5xwhRhipp6lNYa9QJF4jjgyRD": {
+      "name": "Ut Lorem duis officia",
+      "nameOfCeo": "Douglas Jacobs",
+      "address": "Serbia",
+      "establishedAt": "2019-02-18T11:17:55+08:00",
+      "employeeNumber": 52,
+      "capital": 69420666,
+      "isDomestic": true,
+      "phoneNumber": "056-6636-4567",
+      "typeOfBusiness": "Coconut juice ditributor",
+      "note": ""
+    }
+  }
+}

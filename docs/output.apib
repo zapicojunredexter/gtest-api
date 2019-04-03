@@ -1,0 +1,2719 @@
+FORMAT: 1A
+
+# Factly APIss
+# Group Admins
+
+Resources related to admins in the API
+
+## Admins Collection [/admins]
+
+### Create a new admin user [POST]
+
+Create a new admin user.
+
++ name (string) - The user's full name
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            
+    + Body
+
+            {
+              "name": "Harley Laolao"
+            }
+            
+
++ Response 2011
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2msds345j234nk4mnM": {
+                  "name": "Harley Laolao",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to create user"
+
+## Admin users [/admins{?_page,_limit}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of users to retrieve
+        + Default: 5
+
+### List admin users [GET]
+
+Get the list of admin users.
+
++ Response 200
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            content-type: application/json; charset=utf-8
+
+    + Body 
+
+            {
+              "pagination": {
+                "limit": 5,
+                "next": "/admins?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "2msds345j234nk4mnM": {
+                  "name": "Harley Laolao",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                },
+                "4vsds345j123er4mnM": {
+                  "name": "Melissa Fumero",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                },
+                "5ysds345j4556ty4mnM": {
+                  "name": "John Doe",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                },
+                "9psds345j234nk6ypo": {
+                  "name": "Chris Kirkman",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                },
+                "3fgds345j234nk6hjk": {
+                  "name": "Danny Vasquez",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to admin users list"
+
+## Admin [/admins/{admin_id}]
+
++ Parameters
+    + admin_id: `2msds345j234nk4mnM` (string) - user id in the form of string
+
+### Get admin user info [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+                {
+                  "data": {
+                    "2msds345j234nk4mnM": {
+                      "name": "Harley Laolao",
+                      "createdAt": "2019-02-14T12:54:47+08:00",
+                      "updatedAt": "2019-02-14T12:54:47+08:00"
+                    }
+                  }
+                }
+                
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to admin user info"
+
+### Edit admin user info [PUT]
+
++ name (string) - The user's full name
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "name": "Harley Laolao"
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2msds345j234nk4mnM": {
+                  "name": "Harley Laolao",
+                  "createdAt": "2019-02-14T12:54:47+08:00",
+                  "updatedAt": "2019-02-14T12:54:47+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit admin user info"
+
+# Group Users
+
+## Users Collection [/users]
+
+### Create a new user [POST]
+
+Create a new user.
+
++ organization (Object) 
+    + name (string)
+    + address (string)
+    + postalCode (number)
+    + phoneNumber (number)
+    + faxNumber (number)
+    + representative (string)
+    + typeOfBusiness (string)
+    + url (string)
++ personal (Object)
+    + firstName (string)
+    + lastName (string)
+    + department (string)
+    + position (string)
+    + phoneNumber (number)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "organization": {
+                "name": "Great Sound System",
+                "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+                "postalCode": "350-1303",
+                "phoneNumber": "056-5525-3456",
+                "faxNumber": "056-5525-3456",
+                "representative": "Lucas Todd",
+                "typeOfBusiness": "",
+                "url": ""
+              },
+              "personal": {
+                "firstName": "Takumi",
+                "lastName": "Nakazono",
+                "department": "Operations",
+                "position": "COO",
+                "phoneNumber": "056-5525-3456"
+              },
+              "status": "PENDING"
+            }
+            
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "4In45Ksd84Hlo42on4k3": {
+                  "organization": {
+                    "name": "Great Sound System",
+                    "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+                    "postalCode": "350-1303",
+                    "phoneNumber": "056-5525-3456",
+                    "faxNumber": "056-5525-3456",
+                    "representative": "Lucas Todd",
+                    "typeOfBusiness": "",
+                    "url": ""
+                  },
+                  "personal": {
+                    "firstName": "Takumi",
+                    "lastName": "Nakazono",
+                    "department": "Operations",
+                    "position": "COO",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "PENDING",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00",
+                  "biddingHistory": []
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Basic realm="Access to signup"
+
+## Users [/users{?_page,_limit}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of users to retrieve
+        + Default: 5
+
+### List users [GET]
+
+Get the list of users
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "next": "/users?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "4In45Ksd84Hlo42on4k3": {
+                  "organization": {
+                    "name": "Great Sound System",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "personal": {
+                    "firstName": "Takumi",
+                    "lastName": "Nakazono",
+                    "department": "Operations",
+                    "position": "COO",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "ACCEPTED",
+                  "email": "takumi@gss.com",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                },
+                "0Gh7vGaxruUYt5q8f1uYfC": {
+                  "organization": {
+                    "name": "Dolore pariatur veniam",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "personal": {
+                    "firstName": "Charlie",
+                    "lastName": "Guzman",
+                    "department": "Operations",
+                    "position": "",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "ACCEPTED",
+                  "email": "charlieg@nevwu.dm",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                },
+                "BV0Ick75owKZYIzIhAJKIF0": {
+                  "organization": {
+                    "name": "In velit amet",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "personal": {
+                    "firstName": "Zachary",
+                    "lastName": "Burke",
+                    "department": "Operations",
+                    "position": "",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "ACCEPTED",
+                  "email": "zacharyb@gss.com",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                },
+                "7xKUQilDeyun4OoMGTL3xlHS": {
+                  "organization": {
+                    "name": "Veniam officia excepteur",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "personal": {
+                    "firstName": "Nora",
+                    "lastName": "Harrison",
+                    "department": "Operations",
+                    "position": "",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "ACCEPTED",
+                  "email": "norah@gss.com",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                },
+                "04PasfdAGpaun32btr5eIycuhgi": {
+                  "organization": {
+                    "name": "Nostrud reprehenderit",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "personal": {
+                    "firstName": "Emilie",
+                    "lastName": "Arnold",
+                    "department": "Operations",
+                    "position": "",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "ACCEPTED",
+                  "email": "emiliea@gss.com",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to users list"
+
+## User [/users/{user_id}]
+
++ Parameters
+    + user_id: `4In45Ksd84Hlo42on4k3` (string) - user id in the form of string
+
+### Get user info [GET]
+
+Get user info
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "4In45Ksd84Hlo42on4k3": {
+                  "organization": {
+                    "organization": {
+                      "name": "Great Sound System",
+                      "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+                      "postalCode": "350-1303",
+                      "phoneNumber": "056-5525-3456",
+                      "faxNumber": "056-5525-3456",
+                      "representative": "Lucas Todd",
+                      "typeOfBusiness": "",
+                      "url": ""
+                    },
+                    "personal": {
+                      "firstName": "Takumi",
+                      "lastName": "Nakazono",
+                      "department": "Operations",
+                      "position": "COO",
+                      "phoneNumber": "056-5525-3456"
+                    },
+                    "status": "PENDING",
+                    "createdAt": "2019-02-27T10:31:27+08:00",
+                    "updatedAt": "2019-02-27T10:31:27+08:00",
+                    "biddingHistory": []
+                  }
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to user info"
+
+### Edit user info [PUT]
+
+Edit user info
+
++ organization (Object) 
+    + name (string)
+    + address (string)
+    + postalCode (number)
+    + phoneNumber (number)
+    + faxNumber (number)
+    + representative (string)
+    + typeOfBusiness (string)
+    + url (string)
++ personal (Object)
+    + firstName (string)
+    + lastName (string)
+    + department (string)
+    + position (string)
+    + phoneNumber (number)
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "organization": {
+                "name": "Great Sound System",
+                "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+                "postalCode": "350-1303",
+                "phoneNumber": "056-5525-3456",
+                "faxNumber": "056-5525-3456",
+                "representative": "Lucas Todd",
+                "typeOfBusiness": "",
+                "url": ""
+              },
+              "personal": {
+                "firstName": "Takumi",
+                "lastName": "Nakazono",
+                "department": "Operations",
+                "position": "",
+                "phoneNumber": "056-5525-3456"
+              },
+              "status": "ACCEPTED"
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "4In45Ksd84Hlo42on4k3": {
+                  "organization": {
+                    "name": "Great Sound System",
+                    "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+                    "postalCode": "350-1303",
+                    "phoneNumber": "056-5525-3456",
+                    "faxNumber": "056-5525-3456",
+                    "representative": "Lucas Todd",
+                    "typeOfBusiness": "",
+                    "url": ""
+                  },
+                  "personal": {
+                    "firstName": "Takumi",
+                    "lastName": "Nakazono",
+                    "department": "Operations",
+                    "position": "COO",
+                    "phoneNumber": "056-5525-3456"
+                  },
+                  "status": "PENDING",
+                  "createdAt": "2019-02-27T10:31:27+08:00",
+                  "updatedAt": "2019-02-27T10:31:27+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit user info"
+
+## User bidding history [/users/{user_id}/biddingHistory{?_limit,_page,_sortBy,_sortDirection,id,projectName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + user_id: `4In45Ksd84Hlo42on4k3` (string)
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `projectName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + projectName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List user bidding history [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "start": 0,
+                "next": "/users/4In45Ksd84Hlo42on4k3/biddingHistory?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "4In45Ksd84Hlo42on4k3": {
+                  "2I32nk34nk2j34KJ34kj3": {
+                    "projectRef": "3nM4idd3kSM34edk3ek",
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "cO7B0UdyM3gkFdau8padvnc": {
+                    "projectRef": "3nM4idd3kSM34edk3ek",
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "EXyo4OwflKobkHnlqJTRVmb": {
+                    "projectRef": "3nM4idd3kSM34edk3ek",
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "icVE8HXHz3wR35Hh9SDHBMBc4": {
+                    "projectRef": "3nM4idd3kSM34edk3ek",
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "Dn8c22Iv6yr4yAAonUKa6eqBk": {
+                    "projectRef": "3nM4idd3kSM34edk3ek",
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  }
+                }
+              }
+            }
+            
+
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to user bidding history"
+
+# Group Projects
+
+Resources related to Projects
+
+## Case Studies Collection [/caseStudies]
+
+### Add new case study [POST]
+
+Add a new case study
+
++ published (object)
+    + name (string) - descriptive name of the case study
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the case study
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ name (string) - descriptive name of the project
++ imageUrl (string) - url for project's main image
++ description (string) - project description
++ supplierRef (string) - supplier_id
++ wysiwygHtml (string) - html code for project page
++ packageSize (number) - expected size per package
++ price (number) - price per package
++ totalPackageNum (number) - expected number of package to be produced in total
++ isNowShowing (boolean) 
++ isCaseStudy (boolean)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "draft": {},
+              "published": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              },
+              "isNowShowing": false,
+              "isCaseStudy": true
+            }
+            
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "published": {
+                    "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new case study"
+
+## Case Studies [/caseStudies{?_page,_limit,_sortBy,_sortDirection,caseStudyName,supplierName,packageSize,totalPackageNum,availablePackages,price,isNowShowing,createdAt,updatedAt}]
+
++ Case studies can be retrieved with both Basic and Bearer token
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of projects to retrieve
+        + Default: 5
+    + _sortBy (optional, strting)
+        + Members:
+            + `caseStudyName`
+            + `supplierName`
+            + `packageSize`
+            + `totalPackageNum`
+            + `availablePackages`
+            + `price`
+            + `isNowShowing`
+            + `createdAt`
+            + `updatedAt`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + caseStudyName (optional, string)
+    + supplierName (optional, string)
+    + packageSize (optional, number)
+    + totalPackageNum (optional, number)
+    + availablePackages (optional, number)
+    + price (optional, number)
+    + isNowShowing (optional, boolean)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+
+### List case studies [GET]
+
++ Request Retrieve first page with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "next": "/projects?_page=2&_limit=5"
+              },
+              "size": 3,
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "published": {
+                    "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "T6sHmneJ8AHY2by90VKy0H4b099ffqEeJYyJ": {
+                  "published": {
+                    "name": "Ad in elit aliqua enim aliquip commodo non est exercitation adipisicing consectetur do dolore",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Eu culpa dolor aliquip laborum exercitation. Incididunt dolore voluptate ex laboris consequat incididunt ea excepteur magna eu dolor non mollit. Pariatur exercitation fugiat excepteur reprehenderit duis nulla laboris occaecat.",
+                    "supplierRef": "h8eSftOtKIVgugSccT6jpMZ8",
+                    "supplierName": "Voluptate reprehenderit",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "vowFrVoRmQh0lb0eKqxUJrzBFCwkYTFOdZyVqng1": {
+                  "published": {
+                    "name": "Ullamco cillum dolore ex labore ex ut duis aute eu laboris exercitation commodo cupidatat excepteur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Fugiat proident adipisicing occaecat esse ad cupidatat velit consequat ut anim. Aliqua est non ex sunt officia qui eiusmod laborum proident non in deserunt adipisicing. Anim velit ipsum ullamco cillum enim irure incididunt ad ullamco consectetur id. Sit pariatur consectetur culpa ex officia cillum occaecat Lorem sint.",
+                    "supplierRef": "FLGvhuN5nyW8FOJXwHgVYMXEi",
+                    "supplierName": "Est adipisicing",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Request Retrieve first page with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "next": "/projects?_page=2&_limit=5"
+              },
+              "size": 3,
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "published": {
+                    "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "T6sHmneJ8AHY2by90VKy0H4b099ffqEeJYyJ": {
+                  "published": {
+                    "name": "Ad in elit aliqua enim aliquip commodo non est exercitation adipisicing consectetur do dolore",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Eu culpa dolor aliquip laborum exercitation. Incididunt dolore voluptate ex laboris consequat incididunt ea excepteur magna eu dolor non mollit. Pariatur exercitation fugiat excepteur reprehenderit duis nulla laboris occaecat.",
+                    "supplierRef": "h8eSftOtKIVgugSccT6jpMZ8",
+                    "supplierName": "Voluptate reprehenderit",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "vowFrVoRmQh0lb0eKqxUJrzBFCwkYTFOdZyVqng1": {
+                  "published": {
+                    "name": "Ullamco cillum dolore ex labore ex ut duis aute eu laboris exercitation commodo cupidatat excepteur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Fugiat proident adipisicing occaecat esse ad cupidatat velit consequat ut anim. Aliqua est non ex sunt officia qui eiusmod laborum proident non in deserunt adipisicing. Anim velit ipsum ullamco cillum enim irure incididunt ad ullamco consectetur id. Sit pariatur consectetur culpa ex officia cillum occaecat Lorem sint.",
+                    "supplierRef": "FLGvhuN5nyW8FOJXwHgVYMXEi",
+                    "supplierName": "Est adipisicing",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to case studies list"
+
+## Case Study [/caseStudies/{project_id}]
+
++ Parameters
+    + project_id: `PioWpm4g01Faz8LHvo6nSn` (string) - project id in string form
+
+### Update Case Study [PATCH]
+
++ isNowShowing (boolean) - is the project shown to client
++ isCaseStudy (boolean) - is the project a case study
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
+
+
++ Request Update visibilty
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "isNowShowing": false
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "isNowShowing": false,
+                  "updatedAt": "2019-02-20T11:16:05+08:00"
+                }
+              }
+            }
+            
+
++ Request Update status
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "isCaseStudy": true
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "isCaseStudy": true,
+                  "updatedAt": "2019-02-20T11:16:05+08:00"
+                }
+              }
+            }
+            
+
++ Request Save to published
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "published": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              }
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                  "imageUrl": "images/bamboofeatured_image",
+                  "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                  "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                  "supplierName": "Vutongz",
+                  "wysiwygHtml": "",
+                  "packageSize": 50,
+                  "price": 90000,
+                  "totalPackageNum": 4,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00"
+                }
+              }
+            }
+            
+
++ Request Save to draft
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "draft": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              }
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                  "imageUrl": "images/bamboofeatured_image",
+                  "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                  "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                  "supplierName": "Vutongz",
+                  "wysiwygHtml": "",
+                  "packageSize": 50,
+                  "price": 90000,
+                  "totalPackageNum": 4,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update case study"
+
+### Get case study info [GET]
+
++ Request Retrieve with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "draft": {},
+                  "published": {
+                    "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "ZrLUBa4LNZ7ttxW2cYsXuJKaOpmfprLyvfA": {
+                  "published": {
+                    "name": "Do commodo elit dolore tempor ullamco consequat cupidatat eiusmod aliqua nostrud adipisicing sint nostrud ipsum",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Dolore tempor tempor labore nisi non ex sint Lorem. Eu irure reprehenderit qui velit nisi. Ea dolor tempor tempor Lorem dolor esse exercitation enim officia. Mollit minim est anim pariatur reprehenderit veniam exercitation nostrud.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Request Retrieve with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "draft": {},
+                  "published": {
+                    "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "ZrLUBa4LNZ7ttxW2cYsXuJKaOpmfprLyvfA": {
+                  "published": {
+                    "name": "Do commodo elit dolore tempor ullamco consequat cupidatat eiusmod aliqua nostrud adipisicing sint nostrud ipsum",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Dolore tempor tempor labore nisi non ex sint Lorem. Eu irure reprehenderit qui velit nisi. Ea dolor tempor tempor Lorem dolor esse exercitation enim officia. Mollit minim est anim pariatur reprehenderit veniam exercitation nostrud.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to case study info"
+
+### Delete Case Study [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "draft": {},
+                  "published": {
+                    "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false,
+                  "biddingHistory": [
+                    {
+                      "bidId": "23nk234KJ4jkh8234",
+                      "userRef": "",
+                      "bid": {
+                        "quantity": 4,
+                        "status": "PENDING"
+                      },
+                      "createdAt": "2019-02-18T11:17:55+08:00"
+                    }
+                  ]
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete case study"
+
+## Projects Collection [/projects]
+
+### Add new project [POST]
+
+Add a new project
+
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ name (string) - descriptive name of the project
++ imageUrl (string) - url for project's main image
++ description (string) - project description
++ supplierRef (string) - supplier_id
++ wysiwygHtml (string) - html code for project page
++ packageSize (number) - expected size per package
++ price (number) - price per package
++ totalPackageNum (number) - expected number of package to be produced in total
++ isNowShowing (boolean) 
++ isCaseStudy (boolean)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "draft": {},
+              "published": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              },
+              "isNowShowing": false,
+              "isCaseStudy": true
+            }
+            
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "WundJjnYHnIG2zj552rp9OM81Bn7": {
+                  "published": {
+                    "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new project"
+
+## Projects [/projects{?_page,_limit,_sortBy,_sortDirection,projectName,supplierName,packageSize,totalPackageNum,availablePackages,price,isNowShowing,createdAt,updatedAt}]
+
++ Must require a Bearer token to retrieve projects
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of projects to retrieve
+        + Default: 5
+    + _sortBy: `updatedAt` (optional, string)
+        + Members:
+            + `projectName`
+            + `supplierName`
+            + `packageSize`
+            + `totalPackageNum`
+            + `availablePackages`
+            + `price`
+            + `isNowShowing`
+            + `createdAt`
+            + `updatedAt`
+    + _sortDirection: `desc` (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + projectName (optional, string)
+    + supplierName (optional, string)
+    + packageSize (optional, number)
+    + totalPackageNum (optional, number)
+    + availablePackages (optional, number)
+    + price (optional, number)
+    + isNowShowing (optional, boolean)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+
+### List projects [GET]
+
++ Request Retrieve first page with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "next": "/projects?_page=2&_limit=5"
+              },
+              "size": 2,
+              "data": {
+                "WundJjnYHnIG2zj552rp9OM81Bn7": {
+                  "published": {
+                    "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "ZrLUBa4LNZ7ttxW2cYsXuJKaOpmfprLyvfA": {
+                  "published": {
+                    "name": "Do commodo elit dolore tempor ullamco consequat cupidatat eiusmod aliqua nostrud adipisicing sint nostrud ipsum",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Dolore tempor tempor labore nisi non ex sint Lorem. Eu irure reprehenderit qui velit nisi. Ea dolor tempor tempor Lorem dolor esse exercitation enim officia. Mollit minim est anim pariatur reprehenderit veniam exercitation nostrud.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Request Retrieve first page with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to projects list"
+
+## Project [/projects/{project_id}]
+
++ Parameters
+    + project_id: `3nM4idd3kSM34edk3ek` (string) - project id in string form
+
+### Update Project [PATCH]
+
++ isNowShowing (boolean) - is the project shown to client
++ isCaseStudy (boolean) - is the project a case study
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
+
++ Request Update visibilty
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "isNowShowing": false
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "isNowShowing": false,
+                  "updatedAt": "2019-02-20T11:16:05+08:00"
+                }
+              }
+            }
+            
+
++ Request Update status
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "isCaseStudy": true
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "isCaseStudy": true,
+                  "updatedAt": "2019-02-20T11:16:05+08:00"
+                }
+              }
+            }
+            
+
++ Request Save to published
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "published": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              }
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                  "imageUrl": "images/bamboofeatured_image",
+                  "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                  "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                  "supplierName": "Vutongz",
+                  "wysiwygHtml": "",
+                  "packageSize": 50,
+                  "price": 90000,
+                  "totalPackageNum": 4,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00"
+                }
+              }
+            }
+            
+
++ Request Save to draft
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "draft": {
+                "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                "imageUrl": "images/bamboofeatured_image",
+                "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                "supplierName": "Vutongz",
+                "wysiwygHtml": "",
+                "packageSize": 50,
+                "price": 90000,
+                "totalPackageNum": 4
+              }
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                  "imageUrl": "images/bamboofeatured_image",
+                  "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                  "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                  "supplierName": "Vutongz",
+                  "wysiwygHtml": "",
+                  "packageSize": 50,
+                  "price": 90000,
+                  "totalPackageNum": 4,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00"
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update project"
+
+### Get project info [GET]
+
++ Request Retrieve with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "draft": {},
+                  "published": {
+                    "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                },
+                "ZrLUBa4LNZ7ttxW2cYsXuJKaOpmfprLyvfA": {
+                  "published": {
+                    "name": "Do commodo elit dolore tempor ullamco consequat cupidatat eiusmod aliqua nostrud adipisicing sint nostrud ipsum",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Dolore tempor tempor labore nisi non ex sint Lorem. Eu irure reprehenderit qui velit nisi. Ea dolor tempor tempor Lorem dolor esse exercitation enim officia. Mollit minim est anim pariatur reprehenderit veniam exercitation nostrud.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": false,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Request Retrieve with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to project info"
+
+### Delete Project [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "data": {
+                "PioWpm4g01Faz8LHvo6nSn": {
+                  "draft": {},
+                  "published": {
+                    "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+                    "imageUrl": "images/bamboofeatured_image",
+                    "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+                    "supplierRef": "i3M32iJk34jlkkj2378nk34",
+                    "supplierName": "Vutongz",
+                    "wysiwygHtml": "",
+                    "packageSize": 50,
+                    "price": 90000,
+                    "totalPackageNum": 4,
+                    "createdAt": "2019-02-18T11:17:55+08:00",
+                    "updatedAt": "2019-02-18T11:17:55+08:00"
+                  },
+                  "isNowShowing": false,
+                  "isCaseStudy": true,
+                  "createdAt": "2019-02-18T11:17:55+08:00",
+                  "updatedAt": "2019-02-18T11:17:55+08:00",
+                  "isDeleted": false,
+                  "biddingHistory": [
+                    {
+                      "bidId": "23nk234KJ4jkh8234",
+                      "userRef": "",
+                      "bid": {
+                        "quantity": 4,
+                        "status": "PENDING"
+                      },
+                      "createdAt": "2019-02-18T11:17:55+08:00"
+                    }
+                  ]
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete project"
+
+## Project bidding history [/projects/{project_id}/biddingHistory{?_limit,_page,_sortBy,_sortDirection,id,agencyName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + project_id: `2I32nk34nk2j34KJ34kj3` (string)
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `agencyName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + agencyName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List Project bidding history [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "start": 0,
+                "next": "/projects/WundJjnYHnIG2zj552rp9OM81Bn7/biddingHistory?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "WundJjnYHnIG2zj552rp9OM81Bn7": {
+                  "2I32nk34nk2j34KJ34kj3": {
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "cO7B0UdyM3gkFdau8padvnc": {
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "EXyo4OwflKobkHnlqJTRVmb": {
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "icVE8HXHz3wR35Hh9SDHBMBc4": {
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  },
+                  "Dn8c22Iv6yr4yAAonUKa6eqBk": {
+                    "userRef": "4In45Ksd84Hlo42on4k3",
+                    "quantity": 4,
+                    "status": "PENDING",
+                    "createdAt": "2019-02-19T09:31:46+08:00",
+                    "updatedAt": "2019-02-19T09:31:46+08:00",
+                    "isDeleted": false
+                  }
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to project bidding history"
+
+# Group Bids
+
+Resources related to Bids
+
+## Bids Collection [/bids]
+
+### Add new bid [POST]
+
+Add a new bid
+
++ projectRef (string) - project_id
++ userRef (strting) - user_id
++ quantity (number) - quantity to bid
+
+Create a new bid
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "projectRef": "3nM4idd3kSM34edk3ek",
+              "userRef": "4In45Ksd84Hlo42on4k3",
+              "quantity": 4
+            }
+            
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to add new bid"
+
+## Bids [/bids{?_page,_limit,_sortBy,_sortDirection,id,projectName,agencyName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `projectName`
+            + `agencyName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + projectName (optional, string)
+    + agencyName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List Bids [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "start": 0,
+                "next": "/bids?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 1,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                },
+                "cO7B0UdyM3gkFdau8padvnc": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                },
+                "EXyo4OwflKobkHnlqJTRVmb": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                },
+                "icVE8HXHz3wR35Hh9SDHBMBc4": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                },
+                "Dn8c22Iv6yr4yAAonUKa6eqBk": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to bids list"
+
+## Bid Collection [/bids/{bid_id}]
+
++ Parameters
+    + bid_id: `2I32nk34nk2j34KJ34kj3` (string) - bid id in the form of string
+
+### Get bid info [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to bid info"
+
+### Update bid [PATCH]
+
++ quantity (number) - quantity to bid
++ status (string)
+    + Members:
+        + `PENDING`
+        + `CONTRACTED`
+        + `FAILED`
+
++ Request Update quantity only
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "quantity": 666
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 666,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Request Update status only
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            {
+              "status": "CONTRACTED"
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "CONTRACTED",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update bid"
+
+### Delete bid [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "data": {
+                "2I32nk34nk2j34KJ34kj3": {
+                  "projectRef": "3nM4idd3kSM34edk3ek",
+                  "userRef": "4In45Ksd84Hlo42on4k3",
+                  "quantity": 4,
+                  "status": "PENDING",
+                  "createdAt": "2019-02-19T09:31:46+08:00",
+                  "updatedAt": "2019-02-19T09:31:46+08:00",
+                  "isDeleted": false
+                }
+              }
+            }
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete bid"
+
+# Group Suppliers
+
+Resources related to Suppliers
+
+## Suppliers Collection [/suppliers]
+
+### Add new supplier [POST]
+
+Add a new supplier
+
++ nameOfCeo (string) - name of company's CEO
++ address (string) - company address
++ establishedAt (string) - date the company was established
++ employeeNumber (number) - number of employees in the company
++ capital (number) - company's initial capital
++ isDomestic (boolean) - is the company based domestically in Japan
++ phoneNumber (strting) - company phone number
++ typeOfBusiness (string) - the type of business the company is engaged in
++ note (string) - other notes
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "name": "Vutongz",
+              "nameOfCeo": "Dexter Juntilla",
+              "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+              "establishedAt": "2019-02-18T11:17:55+08:00",
+              "employeeNumber": 52,
+              "capital": 69420666,
+              "isDomestic": true,
+              "phoneNumber": "056-6636-4567",
+              "typeOfBusiness": "Coconut juice ditributor",
+              "note": ""
+            }
+            
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "i3M32iJk34jlkkj2378nk34": {
+                  "name": "Vutongz",
+                  "nameOfCeo": "Dexter Juntilla",
+                  "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new supplier"
+
+## Suppliers [/suppliers{?_page,_limit,_sortBy,_sortDirection,supplierName,nameOfCeo,address,phoneNumber,capital,typeOfBusiness,isDomestic,employeeNumber,establishedAt}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of suppliers to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `supplierName`
+            + `nameOfCeo`
+            + `address`
+            + `phoneNumber`
+            + `capital`
+            + `typeOfBusiness`
+            + `isDomestic`
+            + `employeeNumber`
+            + `establishedAt`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + supplierName (optional, string)
+    + nameOfCeo (optional, string)
+    + address (optional, string)
+    + phoneNumber (optional, string)
+    + capital (optional, number)
+    + typeOfBusiness (optional, string)
+    + isDomestic (optional, boolean)
+    + employeeNumber (optional, number)
+    + establishedAt (optional, string)
+
+
+### List of Suppliers [GET]
+
+Get the list of Suppliers
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "pagination": {
+                "limit": 5,
+                "start": 0,
+                "next": "/suppliers?_page=2&_limit=5"
+              },
+              "size": 5,
+              "data": {
+                "i3M32iJk34jlkkj2378nk34": {
+                  "name": "Vutongz",
+                  "nameOfCeo": "Dexter Juntilla",
+                  "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                },
+                "h8eSftOtKIVgugSccT6jpMZ8": {
+                  "name": "Voluptate reprehenderit",
+                  "nameOfCeo": "Cody Maldonado",
+                  "address": "Venezuela",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                },
+                "FLGvhuN5nyW8FOJXwHgVYMXEi": {
+                  "name": "Est adipisicing",
+                  "nameOfCeo": "Troy Jefferson",
+                  "address": "Mexico",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                },
+                "nC7ClODfvZ7MZfANDRaS5HeANJ": {
+                  "name": "Adipisicing aliquip",
+                  "nameOfCeo": "Herman Miller",
+                  "address": "Barbados",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                },
+                "If5xwhRhipp6lNYa9QJF4jjgyRD": {
+                  "name": "Ut Lorem duis officia",
+                  "nameOfCeo": "Douglas Jacobs",
+                  "address": "Serbia",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to suppliers list"
+
+## Supplier Collection [/suppliers/{supplier_id}]
+
++ Parameters
+    + supplier_id: `i3M32iJk34jlkkj2378nk34` (string) - supplier id in string form
+
+### Get Supplier info [GET]
+
+Get supplier info
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "i3M32iJk34jlkkj2378nk34": {
+                  "name": "Vutongz",
+                  "nameOfCeo": "Dexter Juntilla",
+                  "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to supplier info"
+
+### Edit supplier info [PUT]
+
+Edit supplier info
+
++ nameOfCeo (string) - name of company's CEO
++ address (string) - company address
++ establishedAt (string) - date the company was established
++ employeeNumber (number) - number of employees in the company
++ capital (number) - company's initial capital
++ isDomestic (boolean) - is the company based domestically in Japan
++ phoneNumber (strting) - company phone number
++ typeOfBusiness (string) - the type of business the company is engaged in
++ note (string) - other notes
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            {
+              "nameOfCeo": "Dexter Juntilla",
+              "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+              "establishedAt": "2019-02-18T11:17:55+08:00",
+              "employeeNumber": 52,
+              "capital": 69420666,
+              "isDomestic": true,
+              "phoneNumber": "056-6636-4567",
+              "typeOfBusiness": "Coconut juice ditributor",
+              "note": ""
+            }
+            
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "i3M32iJk34jlkkj2378nk34": {
+                  "name": "Vutongz",
+                  "nameOfCeo": "Dexter Juntilla",
+                  "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit supplier info"
+
+### Delete supplier [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            {
+              "data": {
+                "i3M32iJk34jlkkj2378nk34": {
+                  "name": "Vutongz",
+                  "nameOfCeo": "Dexter Juntilla",
+                  "address": "RP92+CW Kawaguchi, Saitama Prefecture, Japan",
+                  "establishedAt": "2019-02-18T11:17:55+08:00",
+                  "employeeNumber": 52,
+                  "capital": 69420666,
+                  "isDomestic": true,
+                  "phoneNumber": "056-6636-4567",
+                  "typeOfBusiness": "Coconut juice ditributor",
+                  "note": ""
+                }
+              }
+            }
+            
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete supplier"

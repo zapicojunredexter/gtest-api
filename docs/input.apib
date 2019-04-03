@@ -1,0 +1,1403 @@
+FORMAT: 1A
+
+# Factly APIss
+# Group Admins
+
+Resources related to admins in the API
+
+## Admins Collection [/admins]
+
+### Create a new admin user [POST]
+
+Create a new admin user.
+
++ name (string) - The user's full name
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            
+    + Body
+
+            <!-- include(admins/request/post/create-admin-user.json) -->
+
++ Response 2011
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(admins/response/post/create-admin-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to create user"
+
+## Admin users [/admins{?_page,_limit}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of users to retrieve
+        + Default: 5
+
+### List admin users [GET]
+
+Get the list of admin users.
+
++ Response 200
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            content-type: application/json; charset=utf-8
+
+    + Body 
+
+            <!-- include(admins/response/get/get-admin-users.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to admin users list"
+
+## Admin [/admins/{admin_id}]
+
++ Parameters
+    + admin_id: `2msds345j234nk4mnM` (string) - user id in the form of string
+
+### Get admin user info [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+                <!-- include(admins/response/get/get-admin-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to admin user info"
+
+### Edit admin user info [PUT]
+
++ name (string) - The user's full name
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(admins/request/put/edit-admin-user.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(admins/response/put/edit-admin-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit admin user info"
+
+# Group Users
+
+## Users Collection [/users]
+
+### Create a new user [POST]
+
+Create a new user.
+
++ organization (Object) 
+    + name (string)
+    + address (string)
+    + postalCode (number)
+    + phoneNumber (number)
+    + faxNumber (number)
+    + representative (string)
+    + typeOfBusiness (string)
+    + url (string)
++ personal (Object)
+    + firstName (string)
+    + lastName (string)
+    + department (string)
+    + position (string)
+    + phoneNumber (number)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(users/request/post/create-user.json) -->
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(users/response/post/create-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Basic realm="Access to signup"
+
+## Users [/users{?_page,_limit}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of users to retrieve
+        + Default: 5
+
+### List users [GET]
+
+Get the list of users
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(users/response/get/get-users.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to users list"
+
+## User [/users/{user_id}]
+
++ Parameters
+    + user_id: `4In45Ksd84Hlo42on4k3` (string) - user id in the form of string
+
+### Get user info [GET]
+
+Get user info
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(users/response/get/get-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to user info"
+
+### Edit user info [PUT]
+
+Edit user info
+
++ organization (Object) 
+    + name (string)
+    + address (string)
+    + postalCode (number)
+    + phoneNumber (number)
+    + faxNumber (number)
+    + representative (string)
+    + typeOfBusiness (string)
+    + url (string)
++ personal (Object)
+    + firstName (string)
+    + lastName (string)
+    + department (string)
+    + position (string)
+    + phoneNumber (number)
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(users/request/put/edit-user.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(users/response/put/edit-user.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit user info"
+
+## User bidding history [/users/{user_id}/biddingHistory{?_limit,_page,_sortBy,_sortDirection,id,projectName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + user_id: `4In45Ksd84Hlo42on4k3` (string)
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `projectName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + projectName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List user bidding history [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(users/response/get/get-user-bidding-history.json) -->
+
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to user bidding history"
+
+# Group Projects
+
+Resources related to Projects
+
+## Case Studies Collection [/caseStudies]
+
+### Add new case study [POST]
+
+Add a new case study
+
++ published (object)
+    + name (string) - descriptive name of the case study
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the case study
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ name (string) - descriptive name of the project
++ imageUrl (string) - url for project's main image
++ description (string) - project description
++ supplierRef (string) - supplier_id
++ wysiwygHtml (string) - html code for project page
++ packageSize (number) - expected size per package
++ price (number) - price per package
++ totalPackageNum (number) - expected number of package to be produced in total
++ isNowShowing (boolean) 
++ isCaseStudy (boolean)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(projects/request/post/add-new-case-study.json) -->
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/post/add-new-case-study.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new case study"
+
+## Case Studies [/caseStudies{?_page,_limit,_sortBy,_sortDirection,caseStudyName,supplierName,packageSize,totalPackageNum,availablePackages,price,isNowShowing,createdAt,updatedAt}]
+
++ Case studies can be retrieved with both Basic and Bearer token
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of projects to retrieve
+        + Default: 5
+    + _sortBy (optional, strting)
+        + Members:
+            + `caseStudyName`
+            + `supplierName`
+            + `packageSize`
+            + `totalPackageNum`
+            + `availablePackages`
+            + `price`
+            + `isNowShowing`
+            + `createdAt`
+            + `updatedAt`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + caseStudyName (optional, string)
+    + supplierName (optional, string)
+    + packageSize (optional, number)
+    + totalPackageNum (optional, number)
+    + availablePackages (optional, number)
+    + price (optional, number)
+    + isNowShowing (optional, boolean)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+
+### List case studies [GET]
+
++ Request Retrieve first page with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/get/get-case-studies.json) -->
+
++ Request Retrieve first page with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/get/get-case-studies.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to case studies list"
+
+## Case Study [/caseStudies/{project_id}]
+
++ Parameters
+    + project_id: `PioWpm4g01Faz8LHvo6nSn` (string) - project id in string form
+
+### Update Case Study [PATCH]
+
++ isNowShowing (boolean) - is the project shown to client
++ isCaseStudy (boolean) - is the project a case study
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
+
+
++ Request Update visibilty
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/update-visibility.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/update-visibility.json) -->
+
++ Request Update status
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/update-status.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/update-status.json) -->
+
++ Request Save to published
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/save-to-published.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/save-to-published.json) -->
+
++ Request Save to draft
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/save-to-draft.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/save-to-draft.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update case study"
+
+### Get case study info [GET]
+
++ Request Retrieve with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            <!-- include(projects/response/get/get-project.json) -->
+
++ Request Retrieve with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            <!-- include(projects/response/get/get-project.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to case study info"
+
+### Delete Case Study [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(projects/response/delete/delete-case-study.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete case study"
+
+## Projects Collection [/projects]
+
+### Add new project [POST]
+
+Add a new project
+
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ name (string) - descriptive name of the project
++ imageUrl (string) - url for project's main image
++ description (string) - project description
++ supplierRef (string) - supplier_id
++ wysiwygHtml (string) - html code for project page
++ packageSize (number) - expected size per package
++ price (number) - price per package
++ totalPackageNum (number) - expected number of package to be produced in total
++ isNowShowing (boolean) 
++ isCaseStudy (boolean)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(projects/request/post/add-new-project.json) -->
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/post/add-new-project.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new project"
+
+## Projects [/projects{?_page,_limit,_sortBy,_sortDirection,projectName,supplierName,packageSize,totalPackageNum,availablePackages,price,isNowShowing,createdAt,updatedAt}]
+
++ Must require a Bearer token to retrieve projects
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of projects to retrieve
+        + Default: 5
+    + _sortBy: `updatedAt` (optional, string)
+        + Members:
+            + `projectName`
+            + `supplierName`
+            + `packageSize`
+            + `totalPackageNum`
+            + `availablePackages`
+            + `price`
+            + `isNowShowing`
+            + `createdAt`
+            + `updatedAt`
+    + _sortDirection: `desc` (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + projectName (optional, string)
+    + supplierName (optional, string)
+    + packageSize (optional, number)
+    + totalPackageNum (optional, number)
+    + availablePackages (optional, number)
+    + price (optional, number)
+    + isNowShowing (optional, boolean)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+
+### List projects [GET]
+
++ Request Retrieve first page with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/get/get-projects.json) -->
+
++ Request Retrieve first page with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to projects list"
+
+## Project [/projects/{project_id}]
+
++ Parameters
+    + project_id: `3nM4idd3kSM34edk3ek` (string) - project id in string form
+
+### Update Project [PATCH]
+
++ isNowShowing (boolean) - is the project shown to client
++ isCaseStudy (boolean) - is the project a case study
++ published (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
++ draft (object)
+    + name (string) - descriptive name of the project
+    + imageUrl (string) - url for project's main image
+    + description (string) - project description
+    + supplierRef (string) - supplier_id
+    + wysiwygHtml (string) - html code for project page
+    + packageSize (number) - expected size per package
+    + price (number) - price per package
+    + totalPackageNum (number) - expected number of package to  be produced in total
+
++ Request Update visibilty
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/update-visibility.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/update-visibility.json) -->
+
++ Request Update status
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/update-status.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/update-status.json) -->
+
++ Request Save to published
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/save-to-published.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/save-to-published.json) -->
+
++ Request Save to draft
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(projects/request/patch/save-to-draft.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(projects/response/patch/save-to-draft.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update project"
+
+### Get project info [GET]
+
++ Request Retrieve with Bearer token
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body 
+        
+            <!-- include(projects/response/get/get-project.json) -->
+
++ Request Retrieve with Basic token
+
+    + Headers
+
+            Authorization: Basic 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to project info"
+
+### Delete Project [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(projects/response/delete/delete-project.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete project"
+
+## Project bidding history [/projects/{project_id}/biddingHistory{?_limit,_page,_sortBy,_sortDirection,id,agencyName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + project_id: `2I32nk34nk2j34KJ34kj3` (string)
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `agencyName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + agencyName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List Project bidding history [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(projects/response/get/get-project-bidding-history.json) -->
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to project bidding history"
+
+# Group Bids
+
+Resources related to Bids
+
+## Bids Collection [/bids]
+
+### Add new bid [POST]
+
+Add a new bid
+
++ projectRef (string) - project_id
++ userRef (strting) - user_id
++ quantity (number) - quantity to bid
+
+Create a new bid
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(bids/request/post/create-new-bid.json) -->
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(bids/response/post/create-new-bid.json) -->
+
++ Response 401
+
+    + Headers
+
+            WWW-Authenticate: Bearer realm="Access to add new bid"
+
+## Bids [/bids{?_page,_limit,_sortBy,_sortDirection,id,projectName,agencyName,availablePackages,createdAt,updatedAt,status}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of bids to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `id`
+            + `projectName`
+            + `agencyName`
+            + `availablePackages`
+            + `createdAt`
+            + `updatedAt`
+            + `status`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + id (optional, string)
+    + projectName (optional, string)
+    + agencyName (optional, string)
+    + availablePackages (optional, number)
+    + createdAt (optional, string)
+    + updatedAt (optional, string)
+    + status (optional, string) - status of bids to query
+        + Members:
+            + `PENDING`
+            + `CONTRACTED`
+            + `FAILED`
+
+### List Bids [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(bids/response/get/get-bids.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to bids list"
+
+## Bid Collection [/bids/{bid_id}]
+
++ Parameters
+    + bid_id: `2I32nk34nk2j34KJ34kj3` (string) - bid id in the form of string
+
+### Get bid info [GET]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(bids/response/get/get-bid.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to bid info"
+
+### Update bid [PATCH]
+
++ quantity (number) - quantity to bid
++ status (string)
+    + Members:
+        + `PENDING`
+        + `CONTRACTED`
+        + `FAILED`
+
++ Request Update quantity only
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(bids/request/patch/update-bid-quantity.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(bids/response/patch/update-bid-quantity.json) -->
+
++ Request Update status only
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+            Access-Control-Allow-Methods: PATCH
+
+    + Body
+
+            <!-- include(bids/request/patch/update-bid-status.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(bids/response/patch/update-bid-status.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to update bid"
+
+### Delete bid [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(bids/response/delete/delete-bid.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete bid"
+
+# Group Suppliers
+
+Resources related to Suppliers
+
+## Suppliers Collection [/suppliers]
+
+### Add new supplier [POST]
+
+Add a new supplier
+
++ nameOfCeo (string) - name of company's CEO
++ address (string) - company address
++ establishedAt (string) - date the company was established
++ employeeNumber (number) - number of employees in the company
++ capital (number) - company's initial capital
++ isDomestic (boolean) - is the company based domestically in Japan
++ phoneNumber (strting) - company phone number
++ typeOfBusiness (string) - the type of business the company is engaged in
++ note (string) - other notes
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(suppliers/request/post/add-new-supplier.json) -->
+
++ Response 201
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(suppliers/response/post/add-new-supplier.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to add new supplier"
+
+## Suppliers [/suppliers{?_page,_limit,_sortBy,_sortDirection,supplierName,nameOfCeo,address,phoneNumber,capital,typeOfBusiness,isDomestic,employeeNumber,establishedAt}]
+
++ Parameters
+    + _page: `1` (optional, number) - current page number
+        + Default: 1
+    + _limit: `5` (optional, number) - maximum number of suppliers to retrieve
+        + Default: 5
+    + _sortBy (optional, string)
+        + Members:
+            + `supplierName`
+            + `nameOfCeo`
+            + `address`
+            + `phoneNumber`
+            + `capital`
+            + `typeOfBusiness`
+            + `isDomestic`
+            + `employeeNumber`
+            + `establishedAt`
+    + _sortDirection (optional, string)
+        + Members:
+            + `asc`
+            + `desc`
+    + supplierName (optional, string)
+    + nameOfCeo (optional, string)
+    + address (optional, string)
+    + phoneNumber (optional, string)
+    + capital (optional, number)
+    + typeOfBusiness (optional, string)
+    + isDomestic (optional, boolean)
+    + employeeNumber (optional, number)
+    + establishedAt (optional, string)
+
+
+### List of Suppliers [GET]
+
+Get the list of Suppliers
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(suppliers/response/get/get-suppliers.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to suppliers list"
+
+## Supplier Collection [/suppliers/{supplier_id}]
+
++ Parameters
+    + supplier_id: `i3M32iJk34jlkkj2378nk34` (string) - supplier id in string form
+
+### Get Supplier info [GET]
+
+Get supplier info
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(suppliers/response/get/get-supplier.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to supplier info"
+
+### Edit supplier info [PUT]
+
+Edit supplier info
+
++ nameOfCeo (string) - name of company's CEO
++ address (string) - company address
++ establishedAt (string) - date the company was established
++ employeeNumber (number) - number of employees in the company
++ capital (number) - company's initial capital
++ isDomestic (boolean) - is the company based domestically in Japan
++ phoneNumber (strting) - company phone number
++ typeOfBusiness (string) - the type of business the company is engaged in
++ note (string) - other notes
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
+    + Body
+
+            <!-- include(suppliers/request/put/edit-supplier.json) -->
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+
+    + Body
+
+            <!-- include(suppliers/response/put/edit-supplier.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to edit supplier info"
+
+### Delete supplier [DELETE]
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer 1ELpGOOLa6QYOuMO7W1LoN5aTt9fRgY
+
++ Response 200
+
+    + Body
+
+            <!-- include(suppliers/response/delete/delete-supplier.json) -->
+
++ Response 401
+
+    + Headers
+
+                WWW-Authenticate: Bearer realm="Access to delete supplier"

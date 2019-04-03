@@ -1,0 +1,24 @@
+{
+  "data": {
+    "WundJjnYHnIG2zj552rp9OM81Bn7": {
+      "published": {
+        "name": "Reprehenderit elit qui sit incididunt tempor aliqua ullamco do laboris pariatur",
+        "imageUrl": "images/bamboofeatured_image",
+        "description": "Anim proident labore elit sit veniam exercitation aliquip ad. Aute duis et eiusmod ut nostrud. Voluptate nisi aute eiusmod sint eiusmod sint culpa. Ipsum irure proident commodo culpa cupidatat ea est.",
+        "supplierRef": "i3M32iJk34jlkkj2378nk34",
+        "supplierName": "Vutongz",
+        "wysiwygHtml": "",
+        "packageSize": 50,
+        "price": 90000,
+        "totalPackageNum": 4,
+        "createdAt": "2019-02-18T11:17:55+08:00",
+        "updatedAt": "2019-02-18T11:17:55+08:00"
+      },
+      "isNowShowing": false,
+      "isCaseStudy": false,
+      "createdAt": "2019-02-18T11:17:55+08:00",
+      "updatedAt": "2019-02-18T11:17:55+08:00",
+      "isDeleted": false
+    }
+  }
+}

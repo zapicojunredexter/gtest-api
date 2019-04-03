@@ -16,7 +16,8 @@ router
 
 router
     .route("/:id")
-    .get(userController.fetchUser)
+    // .get(userController.fetchUser)
+    .delete(userController.delete)
 
 router
     .route("/")

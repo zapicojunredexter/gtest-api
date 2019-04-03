@@ -1,0 +1,29 @@
+{
+  "data": {
+    "4In45Ksd84Hlo42on4k3": {
+      "organization": {
+        "organization": {
+          "name": "Great Sound System",
+          "address": "Sayama, Saitama Prefecture 350-1303 Japan",
+          "postalCode": "350-1303",
+          "phoneNumber": "056-5525-3456",
+          "faxNumber": "056-5525-3456",
+          "representative": "Lucas Todd",
+          "typeOfBusiness": "",
+          "url": ""
+        },
+        "personal": {
+          "firstName": "Takumi",
+          "lastName": "Nakazono",
+          "department": "Operations",
+          "position": "COO",
+          "phoneNumber": "056-5525-3456"
+        },
+        "status": "PENDING",
+        "createdAt": "2019-02-27T10:31:27+08:00",
+        "updatedAt": "2019-02-27T10:31:27+08:00",
+        "biddingHistory": []
+      }
+    }
+  }
+}

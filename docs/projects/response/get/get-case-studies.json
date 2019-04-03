@@ -1,0 +1,69 @@
+{
+  "pagination": {
+    "limit": 5,
+    "next": "/projects?_page=2&_limit=5"
+  },
+  "size": 3,
+  "data": {
+    "PioWpm4g01Faz8LHvo6nSn": {
+      "published": {
+        "name": "Handmade Bamboo Storage Baskets Foldable laundry",
+        "imageUrl": "images/bamboofeatured_image",
+        "description": "Quis ex Lorem quis adipisicing laboris nulla eu in dolor dolore dolor veniam laboris. Culpa fugiat pariatur consectetur nostrud laborum. Exercitation occaecat et mollit consectetur ipsum laboris excepteur dolore proident. In in in cillum non nostrud sit duis reprehenderit cillum. Ad aliqua nisi minim pariatur id. Amet magna nostrud in qui dolor culpa aliquip ullamco est ipsum cillum. Anim qui labore in laboris non nostrud esse nisi ex duis qui voluptate.",
+        "supplierRef": "i3M32iJk34jlkkj2378nk34",
+        "supplierName": "Vutongz",
+        "wysiwygHtml": "",
+        "packageSize": 50,
+        "price": 90000,
+        "totalPackageNum": 4,
+        "createdAt": "2019-02-18T11:17:55+08:00",
+        "updatedAt": "2019-02-18T11:17:55+08:00"
+      },
+      "isNowShowing": false,
+      "isCaseStudy": true,
+      "createdAt": "2019-02-18T11:17:55+08:00",
+      "updatedAt": "2019-02-18T11:17:55+08:00",
+      "isDeleted": false
+    },
+    "T6sHmneJ8AHY2by90VKy0H4b099ffqEeJYyJ": {
+      "published": {
+        "name": "Ad in elit aliqua enim aliquip commodo non est exercitation adipisicing consectetur do dolore",
+        "imageUrl": "images/bamboofeatured_image",
+        "description": "Eu culpa dolor aliquip laborum exercitation. Incididunt dolore voluptate ex laboris consequat incididunt ea excepteur magna eu dolor non mollit. Pariatur exercitation fugiat excepteur reprehenderit duis nulla laboris occaecat.",
+        "supplierRef": "h8eSftOtKIVgugSccT6jpMZ8",
+        "supplierName": "Voluptate reprehenderit",
+        "wysiwygHtml": "",
+        "packageSize": 50,
+        "price": 90000,
+        "totalPackageNum": 4,
+        "createdAt": "2019-02-18T11:17:55+08:00",
+        "updatedAt": "2019-02-18T11:17:55+08:00"
+      },
+      "isNowShowing": false,
+      "isCaseStudy": true,
+      "createdAt": "2019-02-18T11:17:55+08:00",
+      "updatedAt": "2019-02-18T11:17:55+08:00",
+      "isDeleted": false
+    },
+    "vowFrVoRmQh0lb0eKqxUJrzBFCwkYTFOdZyVqng1": {
+      "published": {
+        "name": "Ullamco cillum dolore ex labore ex ut duis aute eu laboris exercitation commodo cupidatat excepteur",
+        "imageUrl": "images/bamboofeatured_image",
+        "description": "Fugiat proident adipisicing occaecat esse ad cupidatat velit consequat ut anim. Aliqua est non ex sunt officia qui eiusmod laborum proident non in deserunt adipisicing. Anim velit ipsum ullamco cillum enim irure incididunt ad ullamco consectetur id. Sit pariatur consectetur culpa ex officia cillum occaecat Lorem sint.",
+        "supplierRef": "FLGvhuN5nyW8FOJXwHgVYMXEi",
+        "supplierName": "Est adipisicing",
+        "wysiwygHtml": "",
+        "packageSize": 50,
+        "price": 90000,
+        "totalPackageNum": 4,
+        "createdAt": "2019-02-18T11:17:55+08:00",
+        "updatedAt": "2019-02-18T11:17:55+08:00"
+      },
+      "isNowShowing": false,
+      "isCaseStudy": true,
+      "createdAt": "2019-02-18T11:17:55+08:00",
+      "updatedAt": "2019-02-18T11:17:55+08:00",
+      "isDeleted": false
+    }
+  }
+}
