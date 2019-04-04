@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const validationMiddleware = require('../../middlewares/scheme.validator');
 
-const userSchema = Joi.object().keys({
+const schema = Joi.object().keys({
     "Birthdate": Joi.string(),
     "ContactNumber": Joi.string(),
     "FirstName": Joi.string(),
@@ -22,5 +22,5 @@ const userSchema = Joi.object().keys({
 });
 
 module.exports = {
-    userSchema
+    schema
 }

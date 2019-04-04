@@ -1,9 +1,5 @@
-const admin = require('firebase-admin');
 const responses = require('../models/Response');
 const Terminal = require('./Terminal');
-const collectionsService = require('../../services/collections.service');
-
-const terminalsCollection = collectionsService.getTerminalsCollection();
 
 const {
     NotFoundResponse,
@@ -70,16 +66,10 @@ exports.update = async (req, res) => {
         if (!terminal) {
             return res.status(UserNotFound.status).send(UserNotFound);
         }
-        await Terminal.update({
+        await Terminal.update(id,{
             TerminalId: id,
             ...body
         });
-
-        // const terminalRef = terminalsCollection.doc(id);
-        // const user = await terminalRef.get();
-        // if (!user.exists) {
-        //     return res.status(UserNotFound.status).send(UserNotFound);
-        // }
     
         return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {

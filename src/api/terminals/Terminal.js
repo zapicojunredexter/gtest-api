@@ -7,7 +7,7 @@ class Terminal {
     constructor (params) {
         this.TerminalId = params.TerminalId;
         this.TerminalAddress = params.TerminalAddress;
-        this.TerminalContactNo = params.TerminalContactNo;
+        this.TerminalContactNumber = params.TerminalContactNumber;
         this.Coordinates = params.Coordinates;
 
         this.terminalCollection = getTerminalsCollection();
@@ -16,13 +16,13 @@ class Terminal {
     async create () {
         const {
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates
         } = this;
 
         const toBeAdded = {
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates,
             "createdAt": admin.firestore.FieldValue.serverTimestamp(),
             "deleted": false,
@@ -47,14 +47,14 @@ class Terminal {
         const {
             TerminalId,
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates
         } = this;
 
         const toBeEdited = {
             TerminalId,
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
@@ -88,14 +88,14 @@ class Terminal {
         const {
             TerminalId,
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates
         } = this;
         
         return JSON.stringify({
             TerminalId,
             TerminalAddress,
-            TerminalContactNo,
+            TerminalContactNumber,
             Coordinates
         });
     }
@@ -122,7 +122,7 @@ class Terminal {
         if (response.exists) {
             return response.data();
         }
-        
+
         return null;
     }
 
@@ -132,13 +132,12 @@ class Terminal {
         return response.docs.map((obj) => obj.data());
     }
 
-    static async update (object) {
-        const {TerminalId} = object;
+    static async update (id,object) {
         const toBeEdited = {
             ...object,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
-        const docRef = getTerminalsCollection().doc(TerminalId);
+        const docRef = getTerminalsCollection().doc(id);
 
         await docRef
             .set({...toBeEdited},{"merge": true});

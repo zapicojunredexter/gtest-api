@@ -1,26 +1,21 @@
 const Joi = require('joi');
 const validationMiddleware = require('../../middlewares/scheme.validator');
 
-const userSchema = Joi.object().keys({
-    "Birthdate": Joi.string(),
-    "ContactNumber": Joi.string(),
-    "FirstName": Joi.string(),
-    "Gender": Joi.string()
-        .valid('male', 'female'),
-    "LastName": Joi.string()
+const schema = Joi.object().keys({
+    "Coordinates": Joi.array().items(Joi.number()),
+    "TerminalAddress": Joi.string(),
+    "TerminalContactNumber": Joi.string()
 })
 .when(Joi.ref('$action'), {
     "is": validationMiddleware.POST,
     "then": Joi.object({
-        "Birthdate": Joi.string(),
-        "ContactNumber": Joi.string(),
-        "FirstName": Joi.string(),
-        "Gender": Joi.string()
-            .valid('male', 'female'),
-        "LastName": Joi.string()
+        "Coordinates": Joi.array().items(Joi.number())
+            .required(),
+        "TerminalAddress": Joi.string().required(),
+        "TerminalContactNumber": Joi.string().required()
     })
 });
 
 module.exports = {
-    userSchema
+    schema
 }

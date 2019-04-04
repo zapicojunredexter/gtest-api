@@ -11,7 +11,7 @@ router
     .route("/users")
     .get(userController.fetchUsers)
     .post(
-        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.userSchema),
+        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.schema),
         userController.add,
     )
     .all(errrorMiddleware.allowOnly([
