@@ -1,18 +1,27 @@
 const admin = require('firebase-admin');
-// const User = require('./User');
+const responses = require('../models/Response');
 const collectionsService = require('../../services/collections.service');
 
 const usersCollection = collectionsService.getUsersCollection();
 
+const {
+    NotFoundResponse,
+    SuccessResponse,
+    ServerErrorResponse
+} = responses;
+
+const UserNotFound = new NotFoundResponse('User could not be found','User could not be found');
+const ServerSuccess = new SuccessResponse('Success', {"success": true});
+const ServerError = new ServerErrorResponse('Error', {"success": false});
 
 exports.fetchUsers = async (req, res) => {
     try {
         const userRef = usersCollection;
         const response = await userRef.get();
 
-        return res.status(200).send(response.docs.map((obj) => obj.data()));
+        return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
     } catch (error) {
-        return res.status(500).send({"error": error.message});
+        return res.status(ServerError.status).send({"error": error.message});
     }
 }
 
@@ -38,7 +47,8 @@ exports.add = async (req, res) => {
                 "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
             },{"merge": true});
 
-        return res.status(200).send({"success": true});
+
+        return res.status(ServerSuccess.status).send(ServerSuccess);
 
         /*
         // if exclude registration flow
@@ -57,7 +67,7 @@ exports.add = async (req, res) => {
         return res.status(200).send({"success": true});
         */
     } catch (error) {
-        return res.status(500).send({"error": error.message});
+        return res.status(ServerError.status).send({"error": error.message});
     }
 };
 
@@ -70,12 +80,12 @@ exports.fetchUser = async (req, res) => {
             .get();
 
         if (!response.exists) {
-            return res.status(404).send({"message": "User not found"});
+            return res.status(UserNotFound.status).send(UserNotFound);
         }
 
-        return res.status(200).send(response.data());    
+        return res.status(ServerSuccess.status).send(response.data());    
     } catch (error) {
-        return res.status(500).send({"error": error.message});
+        return res.status(ServerError.status).send({"error": error.message});
     }
 }
 
@@ -87,7 +97,7 @@ exports.update = async (req, res) => {
         const userRef = usersCollection.doc(id);
         const user = await userRef.get();
         if (!user.exists) {
-            return res.status(404).send({"message": "User not found"});
+            return res.status(UserNotFound.status).send(UserNotFound);
         }
 
         await userRef
@@ -96,9 +106,9 @@ exports.update = async (req, res) => {
                 "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
             },{"merge": true});
     
-        return res.status(200).send({"success": true});
+        return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {
-        return res.status(500).send({"error": error.message});
+        return res.status(ServerError.error).send({"error": error.message});
     }
 };
 
@@ -109,7 +119,7 @@ exports.delete = async (req, res) => {
 
         const user = await userRef.get();
         if (!user.exists) {
-            return res.status(404).send({"message": "User not found"});
+            return res.status(UserNotFound.status).send(UserNotFound);
         }
     
         await userRef
@@ -118,8 +128,8 @@ exports.delete = async (req, res) => {
                 "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
             },{"merge": true});
     
-        return res.status(200).send({"success": true});
+        return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {
-        return res.status(500).send({"error": error.message});
+        return res.status(ServerError.status).send({"error": error.message});
     }
 };
