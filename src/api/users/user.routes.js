@@ -2,13 +2,18 @@ const express = require("express");
 
 const userController = require('./user.controller');
 const errrorMiddleware = require('../../middlewares/errors');
+const validationMiddleware = require('../../middlewares/scheme.validator');
+const userValidation = require('./user.validation');
 
 const router = express.Router();
 
 router
     .route("/users")
     .get(userController.fetchUsers)
-    .post(userController.add)
+    .post(
+        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.userSchema),
+        userController.add,
+    )
     .all(errrorMiddleware.allowOnly([
         'GET',
         'POST'

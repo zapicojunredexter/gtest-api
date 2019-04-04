@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+// const User = require('./User');
 const collectionsService = require('../../services/collections.service');
 
 const usersCollection = collectionsService.getUsersCollection();
@@ -19,7 +20,6 @@ exports.add = async (req, res) => {
     try {
         const {body} = req;
         const {email, password} = body;
-
         const registrationRes = await admin.auth().createUser({
             email,
             password
@@ -37,7 +37,7 @@ exports.add = async (req, res) => {
                 "id": uid,
                 "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
             },{"merge": true});
-    
+
         return res.status(200).send({"success": true});
 
         /*
