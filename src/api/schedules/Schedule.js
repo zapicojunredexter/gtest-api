@@ -138,6 +138,22 @@ class Schedule {
             .doc(key)
             .get();
 
+        /*
+        const test = await getSchedulesCollection()
+        .doc(key)
+        .collection("Trips")
+        .get();
+        const withUser = await Promise.all(test.docs.map(async (object) => {
+            const user = await object.data().UserRef.get();
+
+            return {
+                kinsasdas: object.data().kinsasdas,
+                User: user.data()
+            }
+        }));
+        console.log("BAW LANG", withUser);
+        */
+
         if (response.exists) {
             return response.data();
         }

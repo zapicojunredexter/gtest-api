@@ -1,5 +1,5 @@
 const responses = require('../models/Response');
-const Schedule = require('./Schedule');
+const Trip = require('./Trip');
 
 const {
     NotFoundResponse,
@@ -7,24 +7,26 @@ const {
     ServerErrorResponse
 } = responses;
 
-const UserNotFound = new NotFoundResponse('Schedule could not be found','Schedule could not be found');
+const UserNotFound = new NotFoundResponse('Trip could not be found','Trip could not be found');
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 
-exports.fetchSchedules = async (req, res) => {
+
+exports.fetchTrips = async (req, res) => {
     try {
-        const result = await Schedule.retrieveAll();
-    
+        const result = await Trip.retrieveAll();
+
         return res.status(ServerSuccess.status).send(result);
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }
 }
-exports.fetchSchedule = async (req, res) => {
+
+exports.fetchTrip = async (req, res) => {
     try {
         const {id} = req.params;
         
-        const result = await Schedule.retrieve(id);
+        const result = await Trip.retrieve(id);
 
         if (!result) {
             return res.status(UserNotFound.status).send(UserNotFound);
@@ -40,10 +42,8 @@ exports.add = async (req, res) => {
     try {
         const {body} = req;
 
-        const result = new Schedule(body);
-        const newId = await result.create();
-        result.ScheduleId = newId;
-        const isEdited = await result.update();
+        const newId = await Trip.create(body);
+        const isEdited = await Trip.update(newId,{TripId: newId});
 
         if (!isEdited) {
             throw new Error("Could not set ID");
@@ -60,14 +60,14 @@ exports.update = async (req, res) => {
         const {id} = req.params;
         const {body} = req;
 
-        const result = await Schedule.retrieve(id);
+        const result = await Trip.retrieve(id);
 
         if (!result) {
             return res.status(UserNotFound.status).send(UserNotFound);
         }
-        await Schedule.update(id,{
-            ScheduleId: id,
-            ...body
+        await Trip.update(id,{
+            ...body,
+            TripId: id
         });
     
         return res.status(ServerSuccess.status).send(ServerSuccess);
@@ -79,13 +79,12 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const {id} = req.params;
-        const result = await Schedule.retrieve(id);
+        const result = await Trip.retrieve(id);
 
         if (!result) {
             return res.status(UserNotFound.status).send(UserNotFound);
         }
-        const record = new Schedule(result);
-        await record.delete();
+        await Trip.delete(id);
 
         return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {
