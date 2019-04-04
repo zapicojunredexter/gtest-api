@@ -8,6 +8,8 @@ const SCHEDULES_COLLECTION = 'Schedules';
 
 const TRIPS_COLLECTION = 'Trips';
 
+const BOOKINGS_COLLECTION = 'Bookings';
+
 const getUsersCollection = () => admin.firestore().collection(USERS_COLLECTION);
 
 const getTerminalsCollection = () => admin.firestore().collection(TERMINALS_COLLECTION);
@@ -16,9 +18,12 @@ const getSchedulesCollection = () => admin.firestore().collection(SCHEDULES_COLL
 
 const getTripsCollection = () => admin.firestore().collection(TRIPS_COLLECTION);
 
+const getBookingsCollection = () => admin.firestore().collection(BOOKINGS_COLLECTION);
+
 module.exports = {
     getTerminalsCollection,
     getUsersCollection,
     getSchedulesCollection,
-    getTripsCollection
+    getTripsCollection,
+    getBookingsCollection
 }

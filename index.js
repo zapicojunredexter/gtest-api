@@ -9,10 +9,12 @@ const userRoutes = require("./src/api/users/user.routes");
 const terminalRoutes = require("./src/api/terminals/terminal.routes");
 const scheduleRoutes = require("./src/api/schedules/schedule.routes");
 const tripRoutes = require("./src/api/trips/trip.routes");
+const bookingRoutes = require("./src/api/bookings/booking.routes");
 main.use(userRoutes);
 main.use(terminalRoutes);
 main.use(scheduleRoutes);
 main.use(tripRoutes);
+main.use(bookingRoutes);
 main.get("/", (req, res) => res.sendFile('docs/output.html', {"root": __dirname}));
 
 
