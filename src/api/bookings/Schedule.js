@@ -1,47 +1,51 @@
 const admin = require('firebase-admin');
 const collectionsService = require('../../services/collections.service');
 
-const {getTerminalsCollection} = collectionsService;
+const {getSchedulesCollection} = collectionsService;
 
-class Terminal {
+class Schedule {
 
     /*
-        TerminalId,
-        TerminalAddress,
-        TerminalContactNumber,
-        Coordinates
+        ScheduleId
+        DepartFrom
+        DepartTo
+        DepartureTime
+        EstTravelTime
 
         createdAt
         updatedAt
         deleted
     */
     constructor (params) {
-        this.TerminalId = params.TerminalId;
-        this.TerminalAddress = params.TerminalAddress;
-        this.TerminalContactNumber = params.TerminalContactNumber;
-        this.Coordinates = params.Coordinates;
+        this.ScheduleId = params.ScheduleId;
+        this.DepartFrom = params.DepartFrom;
+        this.DepartTo = params.DepartTo;
+        this.DepartureTime = params.DepartureTime;
+        this.EstTravelTime = params.EstTravelTime;
 
-        this.terminalCollection = getTerminalsCollection();
+        this.scheduleCollection = getSchedulesCollection();
     }
 
     async create () {
         const {
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime
         } = this;
 
         const toBeAdded = {
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates,
-            "createdAt": admin.firestore.FieldValue.serverTimestamp(),
-            "deleted": false,
-            "updatedAt": admin.firestore.FieldValue.serverTimestamp()
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            deleted: false,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
         };
 
-        const addedTerminal = await this.terminalCollection.add(toBeAdded);
-        const {id} = addedTerminal;
+        const addedRecord = await this.scheduleCollection.add(toBeAdded);
+        const {id} = addedRecord;
 
         return id;
     }
@@ -56,21 +60,23 @@ class Terminal {
 
     async update () {
         const {
-            TerminalId,
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates
+            ScheduleId,
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime
         } = this;
 
         const toBeEdited = {
-            TerminalId,
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates,
+            ScheduleId,
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
 
-        const docRef = this.terminalCollection.doc(TerminalId);
+        const docRef = this.scheduleCollection.doc(ScheduleId);
 
         await docRef
             .set({...toBeEdited},{"merge": true});
@@ -80,14 +86,14 @@ class Terminal {
 
 
     async delete () {
-        const {TerminalId} = this;
+        const {ScheduleId} = this;
 
         const toBeEdited = {
             "deleted": true,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
 
-        const docRef = this.terminalCollection.doc(TerminalId);
+        const docRef = this.scheduleCollection.doc(ScheduleId);
 
         await docRef
             .set({...toBeEdited},{"merge": true});
@@ -97,17 +103,19 @@ class Terminal {
 
     toString () {
         const {
-            TerminalId,
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates
+            ScheduleId,
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime
         } = this;
         
         return JSON.stringify({
-            TerminalId,
-            TerminalAddress,
-            TerminalContactNumber,
-            Coordinates
+            ScheduleId,
+            DepartFrom,
+            DepartTo,
+            DepartureTime,
+            EstTravelTime
         });
     }
 
@@ -119,14 +127,14 @@ class Terminal {
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
 
-        const addedTerminal = await getTerminalsCollection.add(toBeAdded);
+        const addedTerminal = await getSchedulesCollection.add(toBeAdded);
         const {id} = addedTerminal;
 
         return id;
     }
 
     static async retrieve (key) {
-        const response = await getTerminalsCollection()
+        const response = await getSchedulesCollection()
             .doc(key)
             .get();
 
@@ -138,7 +146,7 @@ class Terminal {
     }
 
     static async retrieveAll () {
-        const response = await getTerminalsCollection().get();
+        const response = await getSchedulesCollection().get();
 
         return response.docs.map((obj) => obj.data());
     }
@@ -148,7 +156,7 @@ class Terminal {
             ...object,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
-        const docRef = getTerminalsCollection().doc(id);
+        const docRef = getSchedulesCollection().doc(id);
 
         await docRef
             .set({...toBeEdited},{"merge": true});
@@ -161,7 +169,7 @@ class Terminal {
             "deleted": true,
             "updatedAt": admin.firestore.FieldValue.serverTimestamp()
         };
-        const docRef = getTerminalsCollection().doc(id);
+        const docRef = getSchedulesCollection().doc(id);
 
         await docRef
             .set({...toBeEdited},{"merge": true});
@@ -171,4 +179,4 @@ class Terminal {
 
 }
 
-module.exports = Terminal;
+module.exports = Schedule;
