@@ -15,10 +15,10 @@ router
         validationMiddleware.validate(validationMiddleware.CREATE, bookingValidations.schema),
         bookingsController.add
     )
-    // .all(errrorMiddleware.allowOnly([
-    //     'GET',
-    //     'POST'
-    // ]))
+    .all(errrorMiddleware.allowOnly([
+        'GET',
+        'POST'
+    ]))
 
 router
     .route("/bookings/:id")
