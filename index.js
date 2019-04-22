@@ -20,12 +20,13 @@ main.use(bookingRoutes);
 main.use(feedbackRoutes);
 // main.get("/", (req, res) => res.sendFile('docs/output.html', {"root": __dirname}));
 
+/*
 main.get("/", (req, res) => {
   const jwtToken = req.headers;//[API_HEADERS.JWT_TOKEN];
     console.log(jwtToken);
     res.send("OKSSS");
     // res.sendFile('docs/output.html', {"root": __dirname});
 });
-
+*/
 exports.gtestAPI = functions.https.onRequest(main)
 
