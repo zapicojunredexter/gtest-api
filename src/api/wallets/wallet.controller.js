@@ -1,4 +1,3 @@
-const admin = require('firebase-admin');
 const responses = require('../models/Response');
 const User = require('../users/User');
 const collectionsService = require('../../services/collections.service');
@@ -8,16 +7,16 @@ const {getWalletsCollection} = collectionsService;
 const Wallet = require('./Wallet');
 
 const {
-    NotFoundResponse,
+    // NotFoundResponse,
     SuccessResponse,
     ServerErrorResponse
 } = responses;
 
-const UserNotFound = new NotFoundResponse('User could not be found','User could not be found');
+// const UserNotFound = new NotFoundResponse('User could not be found','User could not be found');
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 
-exports.fetchWallets = async (req, res) => {
+exports.fetchWallets = (req, res) => {
     try {
         return res.send("HAhAHIHI");
         // return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
@@ -72,20 +71,22 @@ exports.fetchUsersWallet = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.update = (req, res) => {
     try {
+
+        /*
         const {id} = req.params;
         const {body} = req;
-
+        */
         return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {
         return res.status(ServerError.error).send({"error": error.message});
     }
 };
 
-exports.delete = async (req, res) => {
+exports.delete = (req, res) => {
     try {
-        const {id} = req.params;
+        // const {id} = req.params;
 
         return res.status(ServerSuccess.status).send(ServerSuccess);
     } catch (error) {

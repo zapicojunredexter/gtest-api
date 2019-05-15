@@ -261,7 +261,7 @@ exports.cancelTrip = async (req, res) => {
             };
             batch.update(getUsersCollection().doc(user.Id), newUser);
         });
-        // TODO send notification to user
+        // to do send notification to user
 
         await batch.commit();
 
