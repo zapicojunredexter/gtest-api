@@ -11,6 +11,7 @@ const scheduleRoutes = require("./src/api/schedules/schedule.routes");
 const tripRoutes = require("./src/api/trips/trip.routes");
 const bookingRoutes = require("./src/api/bookings/booking.routes");
 const feedbackRoutes = require("./src/api/feedbacks/feedback.routes");
+const walletRoutes = require("./src/api/wallets/wallet.routes");
 
 main.use(userRoutes);
 main.use(terminalRoutes);
@@ -18,6 +19,7 @@ main.use(scheduleRoutes);
 main.use(tripRoutes);
 main.use(bookingRoutes);
 main.use(feedbackRoutes);
+main.use(walletRoutes);
 // main.get("/", (req, res) => res.sendFile('docs/output.html', {"root": __dirname}));
 
 /*

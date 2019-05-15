@@ -21,6 +21,10 @@ router
     ]))
 
 router
+    .route("/bookings/cancel/:id")
+    .put(bookingsController.cancelBookingViaCommuter)
+
+router
     .route("/bookings/:id")
     .get(bookingsController.fetchBooking)
     .delete(bookingsController.delete)

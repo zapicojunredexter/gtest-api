@@ -4,28 +4,6 @@ const collectionsService = require('../../services/collections.service');
 const {getTripsCollection} = collectionsService;
 
 class Trip {
-
-    /*
-        TripId
-        ScheduleId
-        DriverId
-        MaxCapacity
-        Status
-
-        createdAt
-        updatedAt
-        deleted
-    */
-    constructor (params) {
-        this.TripId = params.TripId;
-        this.ScheduleId = params.ScheduleId;
-        this.DriverId = params.DriverId;
-        this.MaxCapacity = params.MaxCapacity;
-        this.Status = params.Status;
-
-        this.tripCollection = getTripsCollection();
-    }
-
     toString () {
         const {
             TripId,
@@ -47,16 +25,16 @@ class Trip {
     static async create (object) {
         const toBeAdded = {
             ...object,
-            "status": "Waiting",
-            "createdAt": admin.firestore.FieldValue.serverTimestamp(),
-            "deleted": false,
-            "updatedAt": admin.firestore.FieldValue.serverTimestamp()
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            deleted: false,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
         };
 
-        const addedTerminal = await getTripsCollection().add(toBeAdded);
-        const {id} = addedTerminal;
+        const docRef = getTripsCollection().doc();
+        await docRef.set({Id: docRef.id,
+            ...toBeAdded});
 
-        return id;
+        return docRef.id;
     }
 
     static async retrieve (key) {

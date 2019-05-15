@@ -1,9 +1,9 @@
 const admin = require('firebase-admin');
 const collectionsService = require('../../services/collections.service');
 
-const {getUsersCollection} = collectionsService;
+const {getRoutesCollection} = collectionsService;
 
-class User {
+class Route {
     static async create (params) {
         const toBeAdded = {
             ...params,
@@ -12,7 +12,7 @@ class User {
             deleted: false
         };
     
-        const added = await getUsersCollection().add(toBeAdded);
+        const added = await getRoutesCollection().add(toBeAdded);
     
         const newlyAdded = {
             id: added.id,
@@ -23,7 +23,7 @@ class User {
     }
     
     static async retrieve (id) {
-        const result = await getUsersCollection()
+        const result = await getRoutesCollection()
             .doc(id)
             .get();
         if (result.exists) {
@@ -40,7 +40,7 @@ class User {
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         };
 
-        await getUsersCollection()
+        await getRoutesCollection()
             .doc(id)
             .update(toBeUpdated);
 
@@ -53,7 +53,7 @@ class User {
             deleted: true
         };
     
-        await getUsersCollection()
+        await getRoutesCollection()
           .doc(id)
           .update(toBeUpdated);
     
@@ -61,11 +61,11 @@ class User {
     }
     
     static async retrieveAll () {
-        const result = await getUsersCollection().get();
+        const result = await getRoutesCollection().get();
     
         return result.docs.map((data) => ({Id: data.id,
             ...data.data()}));
     }
 }
 
-module.exports = User;
+module.exports = Route;

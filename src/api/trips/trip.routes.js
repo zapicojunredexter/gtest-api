@@ -21,6 +21,10 @@ router
     ]))
 
 router
+    .route("/trips/cancel/:id")
+    .put(tripsController.cancelTrip)
+
+router
     .route("/trips/:id")
     .get(tripsController.fetchTrip)
     .delete(tripsController.delete)

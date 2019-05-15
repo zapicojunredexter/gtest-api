@@ -9,11 +9,14 @@ const schema = Joi.object().keys({
     "SeatsBought": Joi.number()
 })
 .when(Joi.ref('$action'), {
-    "is": validationMiddleware.POST,
-    "then": Joi.object({
-        "CommuterId": Joi.string().required(),
-        "SeatNumber": Joi.string().required(),
-        "SeatsBought": Joi.number().required()
+    is: validationMiddleware.POST,
+    then: Joi.object({
+        CommuterId: Joi.string().required(),
+        Seats: Joi
+            .array()
+            .items(Joi.string())
+            .required(),
+        TripId: Joi.string().required()
     })
 });
 

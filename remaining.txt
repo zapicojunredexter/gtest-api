@@ -1,0 +1,36 @@
+
+should be finished ady - fetching driver's trip details (including route, trip, commuters)
+parameter : tripId
+
+should be finished ady - update trip status
+parameter : tripId
+
+should be finished ady - bookings accepting cancelling commuters per person
+parameter : bookingId
+
+should be finished ady - add trip to backend
+
+should be finished ady - add booking per commuter
+
+should be finished ady - trips cancelling trip
+
+crud for vehicle
+
+
+
+should be finished ady - fetching wallet history per user
+parameter : userId
+
+should be finished ady - adding wallet balance for account
+parameter : userId && amount
+
+should be finished ady - fetching commuter's specific booking details (including route, schedule, vehicle, driver)
+parameter : bookingId
+
+
+
+
+TODO APP side
+
+- listenTrips for commuter dapat nipass sad unsa nga route
+
