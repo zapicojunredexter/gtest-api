@@ -22,7 +22,7 @@ const {
 
 const BookingsNotFound = new NotFoundResponse('Booking could not be found','Booking could not be found');
 const UserNotFound = new NotFoundResponse('User could not be found','User could not be found');
-const TripNotFound = new NotFoundResponse('Trip could not be found','Trip could not be found');
+// const TripNotFound = new NotFoundResponse('Trip could not be found','Trip could not be found');
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 

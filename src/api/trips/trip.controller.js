@@ -227,7 +227,7 @@ exports.update = async (req, res) => {
         }
 
         if (body.Status) {
-            console.log('TODO something when updating status');
+            // console.log('TODO something when updating status');
         }
         await Trip.update(id,{
             ...body,
