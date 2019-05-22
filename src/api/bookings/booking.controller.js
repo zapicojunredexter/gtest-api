@@ -53,15 +53,9 @@ exports.fetchBooking = async (req, res) => {
             return res.status(UserNotFound.status).send(UserNotFound);
         }
 
-        const trip = await Trip.retrieve(booking.TripId);
-
-        if (!trip) {
-            return res.status(TripNotFound.status).send(TripNotFound);
-        }
         const response = {
             Booking: booking,
-            Commuter: user,
-            Trip: trip
+            Commuter: user
         };
 
 
@@ -105,7 +99,16 @@ exports.add = async (req, res) => {
             Id: addBookingRef.id,
             CommuterId,
             Seats,
-            TripId,
+            Trip: {
+                Id: trip.Id,
+                Route: trip.Route,
+                Schedule: trip.Schedule,
+                Driver: trip.Driver,
+                Vehicle: {
+                    Id: trip.Vehicle && trip.Vehicle.Id,
+                    PlateNumber: trip.Vehicle && trip.Vehicle.PlateNumber
+                }
+            },
             Status: 'Waiting',
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),

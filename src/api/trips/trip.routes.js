@@ -34,5 +34,10 @@ router
         'DELETE',
         'PUT'
     ]))
+
+
+router
+    .route("/trips/schedules/:routeId")
+    .get(tripsController.fetchRouteUpcomingTripsDate)
     
 module.exports = router;

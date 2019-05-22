@@ -1,4 +1,5 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-lines */
+// eslint-disable-next-line max-lines
 const admin = require('firebase-admin');
 const responses = require('../models/Response');
 const Trip = require('./Trip');
@@ -22,6 +23,36 @@ const UserNotFound = new NotFoundResponse('Trip could not be found','Trip could 
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 
+exports.fetchRouteUpcomingTripsDate = async (req, res) => {
+    try {
+        const {routeId} = req.params;
+        const route = await Route.retrieve(routeId);
+        if (!route) {
+            return res.status(UserNotFound.status).send({message: "Route does not exists"});
+        }
+        const tripsRef = await getTripsCollection()
+            .where("Status","==","Waiting")
+            .get();
+        const trips = tripsRef.docs.map((data) => ({Id: data.id,
+            ...data.data()}));
+        const filteredByRoutes = trips.filter((trip) => trip.Route.Id === route.Id);
+
+        const departDatesOnly = filteredByRoutes.map((data) => data.Schedule.DepartDate);
+        const unique = departDatesOnly.filter((value, index) => departDatesOnly.indexOf(value) === index);
+
+        const sorted = unique.sort((first, second) => {
+            const dateA = new Date(first);
+            const dateB = new Date(second);
+    
+            return dateA - dateB;
+        });
+        const response = sorted;
+    
+        return res.status(ServerSuccess.status).send(response);
+    } catch (error) {
+        return res.status(ServerError.status).send({"error": error.message});
+    }
+}
 
 exports.fetchTrips = async (req, res) => {
     try {
@@ -47,7 +78,7 @@ exports.fetchTrip = async (req, res) => {
         const usersCollection = getUsersCollection();
         
         const bookingsResponse = await bookingsCollection
-            .where("TripId","==",id)
+            .where("Trip.Id","==",id)
             .get();
         const bookings = bookingsResponse.docs.map((data) => ({Id: data.id,
             ...data.data()}));
@@ -58,13 +89,13 @@ exports.fetchTrip = async (req, res) => {
         const users = usersResponse.map((data) => ({Id: data.id,
             ...data.data()}));
         const usersObject = arrayToObject(users,"Id");
-        const Commuters = bookings.map((data) => ({
+        const Bookings = bookings.map((data) => ({
             ...data,
             Commuter: usersObject[data.CommuterId]
         }));
         const responseData = {
             ...trip,
-            Commuters
+            Bookings
         };
 
         return res.status(ServerSuccess.status).send(responseData);    
@@ -193,6 +224,10 @@ exports.update = async (req, res) => {
 
         if (!result) {
             return res.status(UserNotFound.status).send(UserNotFound);
+        }
+
+        if (body.Status) {
+            console.log('TODO something when updating status');
         }
         await Trip.update(id,{
             ...body,

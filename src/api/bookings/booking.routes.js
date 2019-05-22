@@ -2,24 +2,27 @@ const express = require("express");
 
 const bookingsController = require('./booking.controller');
 const errrorMiddleware = require('../../middlewares/errors');
-const validationMiddleware = require('../../middlewares/scheme.validator');
+// const validationMiddleware = require('../../middlewares/scheme.validator');
 
-const bookingValidations = require('./booking.validation');
+// const bookingValidations = require('./booking.validation');
 
 const router = express.Router();
 
 router
     .route("/bookings")
     .get(bookingsController.fetchBookings)
-    .post(
-        validationMiddleware.validate(validationMiddleware.CREATE, bookingValidations.schema),
-        bookingsController.add
-    )
+    .post(bookingsController.add)
     .all(errrorMiddleware.allowOnly([
         'GET',
         'POST'
     ]))
-
+    
+/*
+    // .post(
+    //     validationMiddleware.validate(validationMiddleware.CREATE, bookingValidations.schema),
+    //     bookingsController.add
+    // )
+    */
 router
     .route("/bookings/cancel/:id")
     .put(bookingsController.cancelBookingViaCommuter)
