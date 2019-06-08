@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const response = require('../api/models/Response');
+// const response = require('../api/models/Response');
 
-const {BadRequestResponse} = response;
+// const {BadRequestResponse} = response;
 
 const POST = 'POST';
 const PATCH = 'PATCH';
@@ -21,10 +21,13 @@ const checkErrors = (result) => {
         const {details} = result.error;
         const errors = [];
         details.map((error) => errors.push(error.message));
-        errorResponse = new BadRequestResponse(
-            'Invalid request to project resource.',
-            {"errors": errors.join(',')},
-        );
+        errorResponse = {
+            status: 400,
+            error: errors.join(','),
+            message: 'Invalid request to project resource.',
+            data: errors
+        };
+        
     }
 
     return errorResponse;
@@ -43,7 +46,7 @@ const validate = (action, schema) => (
     if (responseErrors) {
         return res
             .status(responseErrors.status)
-            .send(`${responseErrors.message} ${JSON.stringify(responseErrors.data)}`);
+            .send(responseErrors);
         // return next(responseErrors);
     }
 

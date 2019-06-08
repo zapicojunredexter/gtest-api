@@ -23,8 +23,11 @@ exports.fetchRoutes = async (req, res) => {
     }
 }
 
-exports.add = (req, res) => {
+exports.addRoutes = async (req, res) => {
     try {
+        const {body} = req;
+        await Route.create(body);
+
         return res.status(200).send({"success": true});
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});

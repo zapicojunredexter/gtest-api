@@ -86,13 +86,16 @@ exports.add = async (req, res) => {
         if (!user) {
             throw new Error('User does not exists');
         }
+        if (user.AccountType !== "Commuter") {
+            throw new Error('User is not a commuter');
+        }
         if (!trip) {
             throw new Error('Trip does not exists');
         }
-        if (user.WalletBalance < trip.Price) {
+        const amountPayable = trip.Price * Seats.length;
+        if (user.WalletBalance < amountPayable) {
             throw new Error('Not enough credits');
         }
-
         // adding new booking doc
         const addBookingRef = getBookingsCollection().doc();
         const toBeAdded = {
@@ -109,6 +112,7 @@ exports.add = async (req, res) => {
                     PlateNumber: trip.Vehicle && trip.Vehicle.PlateNumber
                 }
             },
+            AmtPaid: amountPayable,
             Status: 'Waiting',
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -119,7 +123,7 @@ exports.add = async (req, res) => {
         // update user balance
         const updateUserRef = getUsersCollection().doc(CommuterId);
         const newFields = {
-            WalletBalance: user.WalletBalance - trip.Price,
+            WalletBalance: user.WalletBalance - amountPayable,
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         };
         batch.update(updateUserRef, newFields);
@@ -215,16 +219,17 @@ exports.delete = async (req, res) => {
 exports.cancelBookingViaCommuter = async (req, res) => {
     try {
         const {id} = req.params;
+        const batch = admin.firestore().batch();
         const booking = await Booking.retrieve(id);
 
         if (!booking) {
             return res.status(BookingsNotFound.status).send(BookingsNotFound);
         }
-        if (booking.Status === 'Cancelled') {
-            throw new Error('Booking has already been cancelled');
+        if (booking.Status !== 'Waiting') {
+            throw new Error('Booking can not be cancelled');
         }
 
-        const {AmtPaid,CommuterId} = booking;
+        const {AmtPaid,CommuterId,Seats} = booking;
         const user = await User.retrieve(CommuterId);
 
         if (!user) {
@@ -234,10 +239,24 @@ exports.cancelBookingViaCommuter = async (req, res) => {
         const newUser = {
             WalletBalance: user.WalletBalance + refunded
         };
-        await User.update(user.Id, newUser);
-        await Booking.update(id, {Status: "Cancelled"});
+        const userRef = getUsersCollection().doc(CommuterId);
+        batch.update(userRef, newUser);
+        
+        const bookingRef = getBookingsCollection().doc(id);
+        batch.update(bookingRef, {
+            Status: "Cancelled"
+        });
+        
+        const tripRef = getTripsCollection().doc(booking.Trip.Id);
+        Seats.forEach((seat) => {
+            batch.update(tripRef, {
+                [`Vehicle.Seats.${seat}`]: false
+            });
+        });
 
-        return res.status(ServerSuccess.status).send(ServerSuccess);
+        await batch.commit();
+
+        return res.status(ServerSuccess.status).send({success: true});
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }

@@ -34,6 +34,9 @@ exports.add = async (req, res) => {
         if (!user) {
             throw new Error('User does not exists');
         }
+        if (user.AccountType !== "Commuter") {
+            throw new Error('User is not a commuter');
+        }
         const newUser = {
             WalletBalance: user.WalletBalance + Amount
         };
@@ -41,7 +44,7 @@ exports.add = async (req, res) => {
         await Wallet.create({User: UserId,
             Amount});
 
-        return res.status(ServerSuccess.status).send(ServerSuccess);
+        return res.status(ServerSuccess.status).send({succes: true});
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }

@@ -65,7 +65,13 @@ class Trip {
             .get();
 
         if (response.exists) {
-            return response.data();
+            const data = response.data();
+
+            return {
+                Id: key,
+                ...data,
+                createdAt: data.createdAt.toDate()
+            };
         }
 
         return null;

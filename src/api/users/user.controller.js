@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const responses = require('../models/Response');
 const collectionsService = require('../../services/collections.service');
+const User = require('./User');
 
 const usersCollection = collectionsService.getUsersCollection();
 
@@ -14,12 +15,77 @@ const UserNotFound = new NotFoundResponse('User could not be found','User could 
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 
+exports.registerDriver = async (req, res) => {
+    try {
+        const {body} = req;
+        if (!body.email || !body.password) {
+            return res.status(400).send({message: "bad request"});
+        }
+        const {uid} = await admin.auth().createUser({
+            email: body.email,
+            emailVerified: true,
+            password: body.password,
+            disabled: false
+        });
+        const newUser = {
+            BirthDate: new Date(body.BirthDate),
+            ContactNumber: body.ContactNumber,
+            FirstName: body.FirstName,
+            Gender: body.Gender,
+            LastName: body.LastName,
+            AccountType: 'Driver'
+
+        }
+        const user = await User.set(uid, newUser);
+
+        return res.send(user);
+    } catch (err) {
+        return res.status(ServerError.status).send({"error": err.message});
+    }
+}
+
 exports.fetchUsers = async (req, res) => {
     try {
         const userRef = usersCollection;
         const response = await userRef.get();
 
         return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
+    } catch (error) {
+        return res.status(ServerError.status).send({"error": error.message});
+    }
+}
+
+exports.fetchDrivers = async (req, res) => {
+    try {
+        const userRef = usersCollection;
+        const response = await userRef.where("AccountType","==","Driver").get();
+
+        return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
+    } catch (error) {
+        return res.status(ServerError.status).send({"error": error.message});
+    }
+}
+
+exports.fetchCommuters = async (req, res) => {
+    try {
+        const userRef = usersCollection;
+        const response = await userRef.where("AccountType","==","Commuter").get();
+
+        return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
+    } catch (error) {
+        return res.status(ServerError.status).send({"error": error.message});
+    }
+}
+
+exports.setUser = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {body} = req;
+
+        await User.set(id, body);
+
+        return res.status(ServerSuccess.status).send({...body,
+            Id: id});    
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }

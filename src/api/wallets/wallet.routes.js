@@ -2,6 +2,9 @@ const express = require("express");
 
 const walletController = require('./wallet.controller');
 
+const validationMiddleware = require('../../middlewares/scheme.validator');
+const validation = require('./wallet.validation');
+
 const router = express.Router();
 
 router
@@ -10,7 +13,10 @@ router
 
 router
     .route("/wallets")
-    .post(walletController.add)
+    .post(
+        validationMiddleware.validate(validationMiddleware.CREATE, validation.schema),
+        walletController.add
+    )
     .get(walletController.fetchWallets)
 
     

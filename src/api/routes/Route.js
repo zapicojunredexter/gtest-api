@@ -11,11 +11,16 @@ class Route {
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
             deleted: false
         };
+
+        const docRef = getRoutesCollection().doc();
     
-        const added = await getRoutesCollection().add(toBeAdded);
+        await docRef.set({
+            Id: docRef.id,
+            ...toBeAdded
+        });
     
         const newlyAdded = {
-            id: added.id,
+            id: docRef.id,
             ...toBeAdded
         };
     

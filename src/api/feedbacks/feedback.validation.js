@@ -5,7 +5,7 @@ const schema = Joi.object().keys({
     "DriverId": Joi.string(),
     "CommuterId": Joi.string(),
     "Score": Joi.number(),
-    "Comment": Joi.string()
+    "Comment": Joi.string().allow("")
 })
 .when(Joi.ref('$action'), {
     "is": validationMiddleware.POST,
@@ -14,6 +14,7 @@ const schema = Joi.object().keys({
         "CommuterId": Joi.string().required(),
         "Score": Joi.number().required(),
         "Comment": Joi.string().required()
+        .allow("")
     })
 });
 

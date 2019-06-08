@@ -7,6 +7,26 @@ const userValidation = require('./user.validation');
 
 const router = express.Router();
 
+/*
+router
+    .route("/user/registration")
+    .post(
+        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.schema),
+        userController.registerDriver,
+    );
+*/
+
+router
+    .route("/users/drivers")
+    .get(userController.fetchDrivers)
+    .post(
+        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.schema),
+        userController.registerDriver,
+    );
+router
+    .route("/users/commuters")
+    .get(userController.fetchCommuters);
+
 router
     .route("/users")
     .get(userController.fetchUsers)
@@ -19,16 +39,15 @@ router
         'POST'
     ]))
 
+
 router
     .route("/users/:id")
     .get(userController.fetchUser)
+    .post(
+        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.schema),
+        userController.setUser,
+    )
     .put(userController.update)
     .delete(userController.delete)
-    .all(errrorMiddleware.allowOnly([
-        'GET',
-        'DELETE',
-        'POST',
-        'PUT'
-    ]))
     
 module.exports = router;

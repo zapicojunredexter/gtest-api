@@ -141,7 +141,7 @@ exports.add = async (req, res) => {
             FirstName: user.FirstName,
             BirthDate: user.BirthDate,
             Gender: user.Gender,
-            ContactNum: user.ContactNum
+            ContactNumber: user.ContactNumber
         };
         const nRoute = {
             Id: route.Id,
@@ -208,7 +208,7 @@ exports.add = async (req, res) => {
         };
         */
 
-        return res.status(ServerSuccess.status).send(ServerSuccess);
+        return res.status(ServerSuccess.status).send({success: true});
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }

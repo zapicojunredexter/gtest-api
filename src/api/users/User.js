@@ -27,8 +27,13 @@ class User {
             .doc(id)
             .get();
         if (result.exists) {
-            return {Id: id,
-                ...result.data()};
+            const data = result.data();
+
+            return {
+                Id: id,
+                ...data,
+                createdAt: data.createdAt.toDate()
+            };
         }
 
         return null;
@@ -65,6 +70,23 @@ class User {
     
         return result.docs.map((data) => ({Id: data.id,
             ...data.data()}));
+    }
+
+    static async set (id, params) {
+        const toBeAdded = {
+            ...params,
+            Id: id,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            deleted: false,
+            WalletBalance: 0
+        };
+    
+        const ref = getUsersCollection().doc(id);
+    
+        await ref.set(toBeAdded);
+    
+        return toBeAdded;
     }
 }
 

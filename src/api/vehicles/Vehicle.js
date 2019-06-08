@@ -11,11 +11,14 @@ class Vehicle {
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
             deleted: false
         };
-    
-        const added = await getVehiclesCollection().add(toBeAdded);
+        const docRef = getVehiclesCollection().doc();
+        await docRef.set({
+            Id: docRef.id,
+            ...toBeAdded
+        });
     
         const newlyAdded = {
-            id: added.id,
+            id: docRef.id,
             ...toBeAdded
         };
     

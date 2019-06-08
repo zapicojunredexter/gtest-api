@@ -15,12 +15,11 @@ const UserNotFound = new NotFoundResponse('User could not be found','User could 
 const ServerSuccess = new SuccessResponse('Success', {"success": true});
 const ServerError = new ServerErrorResponse('Error', {"success": false});
 
-exports.fetchUsers = async (req, res) => {
+exports.fetchVehicles = async (req, res) => {
     try {
-        const userRef = usersCollection;
-        const response = await userRef.get();
-
-        return res.status(ServerSuccess.status).send(response.docs.map((obj) => obj.data()));
+        const response = await Vehicle.retrieveAll();
+        
+        return res.status(ServerSuccess.status).send(response);
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }
@@ -31,24 +30,7 @@ exports.add = async (req, res) => {
         const {body} = req;
         await Vehicle.create(body);
 
-        return res.status(ServerSuccess.status).send(ServerSuccess);
-
-        /*
-        // if exclude registration flow
-        const {body} = req;
-        const userRef = db.collection(COLLECTION_NAME);
-        const addedUser = await userRef.add({
-            ...body,
-            "createdAtMs": admin.firestore.FieldValue.serverTimestamp(),
-            "deleted": false,
-            "updatedAtMs": admin.firestore.FieldValue.serverTimestamp()
-        });
-        const {id} = addedUser;
-
-        await userRef.doc(id).set({id},{"merge": true});
-
-        return res.status(200).send({"success": true});
-        */
+        return res.status(200).send({success: true});
     } catch (error) {
         return res.status(ServerError.status).send({"error": error.message});
     }

@@ -1,24 +1,20 @@
 const express = require("express");
 
-const userController = require('./user.controller');
-const errrorMiddleware = require('../../middlewares/errors');
+const controller = require('./vehicle.controller');
 const validationMiddleware = require('../../middlewares/scheme.validator');
-const userValidation = require('./user.validation');
+const validation = require('./vehicle.validation');
 
 const router = express.Router();
 
 router
-    .route("/users")
-    .get(userController.fetchUsers)
+    .route("/vehicles")
+    .get(controller.fetchVehicles)
     .post(
-        validationMiddleware.validate(validationMiddleware.CREATE, userValidation.schema),
-        userController.add,
+        validationMiddleware.validate(validationMiddleware.CREATE, validation.schema),
+        controller.add,
     )
-    .all(errrorMiddleware.allowOnly([
-        'GET',
-        'POST'
-    ]))
 
+/*
 router
     .route("/users/:id")
     .get(userController.fetchUser)
@@ -30,5 +26,6 @@ router
         'POST',
         'PUT'
     ]))
+*/
     
 module.exports = router;
