@@ -26,7 +26,9 @@ main.use(feedbackRoutes);
 main.use(walletRoutes);
 main.use(routeRoutes);
 main.use(vehicleRoutes);
+
 // main.use(cors({origin: true}));
+
 // main.get("/", (req, res) => res.sendFile('docs/output.html', {"root": __dirname}));
 
 /*
