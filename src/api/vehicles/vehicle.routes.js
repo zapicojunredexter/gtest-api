@@ -14,18 +14,8 @@ router
         controller.add,
     )
 
-/*
 router
-    .route("/users/:id")
-    .get(userController.fetchUser)
-    .put(userController.update)
-    .delete(userController.delete)
-    .all(errrorMiddleware.allowOnly([
-        'GET',
-        'DELETE',
-        'POST',
-        'PUT'
-    ]))
-*/
+    .route("/vehicles/:id")
+    .patch(controller.update)
     
 module.exports = router;

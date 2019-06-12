@@ -28,7 +28,9 @@ exports.registerDriver = async (req, res) => {
             disabled: false
         });
         const newUser = {
-            BirthDate: new Date(body.BirthDate),
+            email: body.email,
+            // BirthDate: new Date(body.BirthDate),
+            BirthDate: body.BirthDate,
             ContactNumber: body.ContactNumber,
             FirstName: body.FirstName,
             Gender: body.Gender,

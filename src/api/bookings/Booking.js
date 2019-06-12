@@ -80,7 +80,14 @@ class Trip {
     static async retrieveAll () {
         const response = await getBookingsCollection().get();
 
-        return response.docs.map((obj) => obj.data());
+        return response.docs.map((obj) => {
+            const data = obj.data();
+
+            return {
+                ...data,
+                createdAt: data.createdAt.toDate()
+            };
+        });
     }
 
     static async update (id,object) {
