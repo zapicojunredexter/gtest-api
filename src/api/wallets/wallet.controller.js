@@ -38,7 +38,7 @@ exports.add = async (req, res) => {
             throw new Error('User is not a commuter');
         }
         const newUser = {
-            WalletBalance: user.WalletBalance + Amount
+            WalletBalance: Number(user.WalletBalance) + Number(Amount)
         };
         await User.update(UserId,newUser);
         await Wallet.create({User: UserId,
