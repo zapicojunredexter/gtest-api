@@ -122,14 +122,17 @@ exports.add = async (req, res) => {
 
         // update user balance
         const updateUserRef = getUsersCollection().doc(CommuterId);
+        // 1 extra point per 50 php spent
+        const promoPointsEarned = amountPayable / 50;
         const newFields = {
-            WalletBalance: user.WalletBalance - amountPayable,
+            WalletBalance: user.WalletBalance - amountPayable + promoPointsEarned,
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         };
         batch.update(updateUserRef, newFields);
 
+
         // update trip seats
-        const nSeats = trip.Vehicle.Seats;
+        const nSeats = trip.Vehicle.SeatsStatus;
         Seats.forEach((seat) => {
             if (typeof nSeats[seat] === 'undefined') {
                 throw new Error('Non existent seat');

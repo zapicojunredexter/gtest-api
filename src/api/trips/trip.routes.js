@@ -2,19 +2,18 @@ const express = require("express");
 
 const tripsController = require('./trip.controller');
 const errrorMiddleware = require('../../middlewares/errors');
-const validationMiddleware = require('../../middlewares/scheme.validator');
+// const validationMiddleware = require('../../middlewares/scheme.validator');
 
-const tripValidation = require('./trip.validation');
+// const tripValidation = require('./trip.validation');
 
 const router = express.Router();
 
+// validationMiddleware.validate(validationMiddleware.CREATE, tripValidation.schema),
+        
 router
     .route("/trips")
     .get(tripsController.fetchTrips)
-    .post(
-        validationMiddleware.validate(validationMiddleware.CREATE, tripValidation.schema),
-        tripsController.add
-    )
+    .post(tripsController.add)
     .all(errrorMiddleware.allowOnly([
         'GET',
         'POST'

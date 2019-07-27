@@ -153,7 +153,8 @@ exports.add = async (req, res) => {
             DepartTime,
             DepartDate
         };
-        const vehicleSeatsArray = Object.keys(vehicle.Seats);
+        // const vehicleSeatsArray = Object.keys(vehicle.Seats);
+        const vehicleSeatsArray = vehicle.Seats.map((seat) => seat.key);
         const vehicleSeatsObject = vehicleSeatsArray.reduce((acc, curr) => ({
             ...acc,
             [curr]: false
@@ -161,7 +162,8 @@ exports.add = async (req, res) => {
         const nVehicle = {
             Id: vehicle.Id,
             PlateNumber: vehicle.PlateNumber,
-            Seats: vehicleSeatsObject
+            SeatsStatus: vehicleSeatsObject,
+            SeatsDetails: vehicle.Seats
         }
 
         const toBeAdded = {
