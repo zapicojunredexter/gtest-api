@@ -260,6 +260,7 @@ exports.update = async (req, res) => {
                 ).catch(() => null);
             }
         });
+
         return res.send(includedUsers);
         // return res.status(includedUsers.status).send(ServerSuccess);
     } catch (error) {
