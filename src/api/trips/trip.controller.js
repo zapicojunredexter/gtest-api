@@ -9,6 +9,7 @@ const collectionsService = require('../../services/collections.service');
 const User = require('../users/User');
 const Route = require('../routes/Route');
 const Vehicle = require('../vehicles/Vehicle');
+const notifications = require('../../services/notifications.service');
 
 const {getBookingsCollection,getUsersCollection,getTripsCollection} = collectionsService;
 const {arrayToObject} = ArrayObjectUtil;
@@ -231,12 +232,36 @@ exports.update = async (req, res) => {
         if (body.Status) {
             // console.log('TODO something when updating status');
         }
+
         await Trip.update(id,{
-            ...body,
-            TripId: id
+            ...body
         });
-    
-        return res.status(ServerSuccess.status).send(ServerSuccess);
+
+        const bookingCollection = getBookingsCollection().where("Trip.Id","==",id);
+        const resultingDocs = await bookingCollection.get();
+        const commuterIdsOnly = resultingDocs.docs.map((data) => data.data()).map((data) => data.CommuterId);
+
+        const allUsers = await User.retrieveAll();
+        const includedUsers = allUsers.filter((user) => commuterIdsOnly.includes(user.Id));
+        includedUsers.forEach((user) => {
+            if (user.notifToken) {
+                notifications.sendPushNotification(
+                    {
+                        notification: {
+                            title: 'Trip updated',
+                            body: 'A Trip you`ve booked for has been modified'
+                        },
+                        data: {
+                            trip: {id},
+                            "status_code": "UPDATED_DATA"
+                        }
+                    },
+                    user.notifToken
+                ).catch(() => null);
+            }
+        });
+        return res.send(includedUsers);
+        // return res.status(includedUsers.status).send(ServerSuccess);
     } catch (error) {
         return res.status(ServerError.error).send({"error": error.message});
     }
@@ -258,6 +283,71 @@ exports.delete = async (req, res) => {
     }
 };
 
+
+exports.finishTrip = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const batch = admin.firestore().batch();
+        const trip = await Trip.retrieve(id);
+
+        if (!trip) {
+            throw new Error('Trip does not exist');
+        }
+
+        // update actual trip
+        const updateTripRef = getTripsCollection().doc(id);
+        const newTrip = {
+            Status: 'Finished',
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
+        };
+        batch.update(updateTripRef, newTrip);
+
+        // update bookings under trip
+
+        const bookingsCollection = getBookingsCollection().where('Trip.Id','==',id);
+        const bookingsRefs = await bookingsCollection.get();
+        const bookings = bookingsRefs.docs.map((data) => ({Id: data.id,
+            ...data.data()}));
+        bookings.forEach((booking) => {
+            const newBooking = {
+                Status: 'Finished',
+                updatedAt: admin.firestore.FieldValue.serverTimestamp()
+            };
+            batch.update(getBookingsCollection().doc(booking.Id),newBooking);
+        }); 
+
+        // send notification
+        const users = await Promise.all(bookings.map((booking) => User.retrieve(booking.CommuterId)));
+        users.forEach((user) => {
+            if (user.notifToken) {
+                notifications.sendPushNotification(
+                    {
+                        notification: {
+                            title: 'Trip safely Finished',
+                            body: 'A Trip you`ve booked for has been set to Finished'
+                        },
+                        data: {
+                            driver: {
+                                Id: trip.Driver.Id
+                            },
+                            "status_code": "REVIEW_DRIVER"
+                        }
+                    },
+                    user.notifToken
+                ).catch(() => null);
+            }
+        });
+        // to do send notification to user
+
+        await batch.commit();
+
+        return res.status(ServerSuccess.status).send(ServerSuccess);
+    } catch (error) {
+        return res.status(ServerError.status).send({"error": error.message});
+    }
+}
+
+
 exports.cancelTrip = async (req, res) => {
     try {
         const {id} = req.params;
@@ -277,7 +367,7 @@ exports.cancelTrip = async (req, res) => {
         batch.update(updateTripRef, newTrip);
 
         // update bookings under trip
-        const bookingsCollection = getBookingsCollection().where('TripId','==',id);
+        const bookingsCollection = getBookingsCollection().where('Trip.Id','==',id);
         const bookingsRefs = await bookingsCollection.get();
         const bookings = bookingsRefs.docs.map((data) => ({Id: data.id,
             ...data.data()}));
@@ -297,6 +387,19 @@ exports.cancelTrip = async (req, res) => {
                 updatedAt: admin.firestore.FieldValue.serverTimestamp()
             };
             batch.update(getUsersCollection().doc(user.Id), newUser);
+
+            if (user.notifToken) {
+                notifications.sendPushNotification(
+                    {
+                        notification: {
+                            title: 'Booking cancelled',
+                            body: 'A Trip you`ve booked for has been cancelled'
+                        }
+                    },
+                    user.notifToken
+                ).catch(() => null);
+            }
+            
         });
         // to do send notification to user
 

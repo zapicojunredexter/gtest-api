@@ -22,7 +22,10 @@ router
 router
     .route("/trips/cancel/:id")
     .put(tripsController.cancelTrip)
-
+router
+    .route("/trips/finish/:id")
+    .put(tripsController.finishTrip)
+    
 router
     .route("/trips/:id")
     .get(tripsController.fetchTrip)
