@@ -15,6 +15,9 @@ router
     )
 
 router
+    .route("/vehicles/dateReport/:date")
+    .get(controller.dateReport)
+router
     .route("/vehicles/:id")
     .patch(controller.update)
     

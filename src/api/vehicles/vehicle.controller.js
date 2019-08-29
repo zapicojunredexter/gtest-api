@@ -54,6 +54,15 @@ exports.fetchUser = async (req, res) => {
     }
 }
 
+exports.dateReport = async (req, res) => {
+    try {
+        const {date} = req.params;
+        return res.send({haha: date});
+    } catch (error) {
+        return res.status(ServerError.error).send({"error": error.message});
+    }
+};
+
 exports.update = async (req, res) => {
     try {
         const {id} = req.params;
