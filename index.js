@@ -1,18 +1,18 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const adminSdk = require("./src/services/admin-sdk.service");
-// const cors = require("cors");
+const cors = require("cors");
 
 adminSdk.initDefaultApp();
 
 
 const main = express();
 
-/*
-// main.use(cors({
-//     origin: true
-// }));
-*/
+// /*
+main.use(cors({
+    origin: true
+}));
+// */
 
 const userRoutes = require("./src/api/users/user.routes");
 const terminalRoutes = require("./src/api/terminals/terminal.routes");
@@ -25,6 +25,7 @@ const routeRoutes = require("./src/api/routes/route.routes");
 const vehicleRoutes = require("./src/api/vehicles/vehicle.routes");
 
 // eslint-disable-next-line func-names
+/*
 main.use((req, res, next) => {
 
     res.header('Content-Type','application/json');
@@ -39,6 +40,7 @@ main.use((req, res, next) => {
 
     return next();
 });
+*/
 main.use(userRoutes);
 main.use(terminalRoutes);
 main.use(scheduleRoutes);

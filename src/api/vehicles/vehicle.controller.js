@@ -54,10 +54,9 @@ exports.fetchUser = async (req, res) => {
     }
 }
 
-exports.dateReport = async (req, res) => {
+exports.dateReport = (req, res) => {
     try {
-        const {date} = req.params;
-        return res.send({haha: date});
+        return res.send(null);
     } catch (error) {
         return res.status(ServerError.error).send({"error": error.message});
     }
@@ -68,7 +67,7 @@ exports.update = async (req, res) => {
         const {id} = req.params;
         const {body} = req;
 
-        const vehicle = Vehicle.retrieve(id);
+        const vehicle = await Vehicle.retrieve(id);
         if (!vehicle) {
             return res.status(UserNotFound.status).send(UserNotFound);
         }

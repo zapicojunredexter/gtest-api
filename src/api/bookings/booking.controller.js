@@ -238,9 +238,9 @@ exports.cancelBookingViaCommuter = async (req, res) => {
         if (!user) {
             return res.status(UserNotFound.status).send(UserNotFound);
         }
-        const refunded = AmtPaid - REFUND_AMOUNT;
+        const refunded = Number(AmtPaid) - Number(REFUND_AMOUNT);
         const newUser = {
-            WalletBalance: user.WalletBalance + refunded
+            WalletBalance: Number(user.WalletBalance) + Number(refunded)
         };
         const userRef = getUsersCollection().doc(CommuterId);
         batch.update(userRef, newUser);

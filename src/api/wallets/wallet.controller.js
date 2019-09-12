@@ -1,6 +1,7 @@
 const responses = require('../models/Response');
 const User = require('../users/User');
 const collectionsService = require('../../services/collections.service');
+const notifications = require('../../services/notifications.service');
 
 const {getWalletsCollection} = collectionsService;
 
@@ -43,6 +44,19 @@ exports.add = async (req, res) => {
         await User.update(UserId,newUser);
         await Wallet.create({User: UserId,
             Amount});
+
+        if (user.notifToken) {
+            notifications.sendPushNotification(
+                {
+                    notification: {
+                        title: 'Balance Update',
+                        body: `Your account has been credited with ${Amount} points`
+                    }
+                },
+                user.notifToken
+            ).catch(() => null);
+        }
+            
 
         return res.status(ServerSuccess.status).send({succes: true});
     } catch (error) {

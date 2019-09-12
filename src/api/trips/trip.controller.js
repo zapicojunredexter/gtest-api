@@ -383,8 +383,10 @@ exports.cancelTrip = async (req, res) => {
         // update commuter balances
         const users = await Promise.all(bookings.map((booking) => User.retrieve(booking.CommuterId)));
         users.forEach((user) => {
+            const newBalance = Number(user.WalletBalance) + Number(trip.Price);
             const newUser = {
-                WalletBalance: user.WalletBalance + trip.Price,
+                WalletBalance: newBalance,
+                // WalletBalance: 1000,
                 updatedAt: admin.firestore.FieldValue.serverTimestamp()
             };
             batch.update(getUsersCollection().doc(user.Id), newUser);
